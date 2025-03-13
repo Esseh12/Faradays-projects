@@ -16,8 +16,8 @@ const NextArrow = ({ onClick, style }) => {
 	return (
 		<button
 			onClick={onClick}
-			style={{ ...style, position: 'absolute', bottom: '10px', right: '10px' }}
-			className='bg-[#d32f2f] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:translate-x-2'>
+			style={{ ...style, position: 'absolute', bottom: '50%', left: '100%' }}
+			className='bg-[#d32f2f] text-white rounded-pill w-10 h-10 d-flex align-items-center justify-content-center  transition-all duration-300 hover:translate-x-2'>
 			<FaArrowRight />
 		</button>
 	);
@@ -29,7 +29,7 @@ const PrevArrow = ({ onClick, style }) => {
 		<button
 			onClick={onClick}
 			style={{ ...style, position: 'absolute', bottom: '50%', right: '100%' }}
-			className='bg-[#d32f2f] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:-translate-x-2'>
+			className='bg-[#d32f2f] text-white rounded-pill w-10 h-10 d-flex align-items-center justify-content-center transition-all duration-300 hover:-translate-x-2'>
 			<FaArrowLeft />
 		</button>
 	);
@@ -129,7 +129,7 @@ const NewsSection = () => {
 						Latest News
 					</h2>
 				</div>
-				<div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6'>
+				<div className='flex flex-col md:flex-row md:justify-between md:items-center '>
 					<p className='font-medium text-black text-base mb-2 md:mb-0'>
 						We deliver exceptional insights on solar power and inverter
 						innovations that drive the future of renewable energy.
