@@ -17,7 +17,7 @@ const NextArrow = ({ onClick, style }) => {
 		<button
 			onClick={onClick}
 			style={{ ...style, position: 'absolute', bottom: '50%', left: '100%' }}
-			className='bg-[#d32f2f] text-white rounded-pill w-10 h-10 d-flex align-items-center justify-content-center  transition-all duration-300 hover:translate-x-2'>
+			className='custom-next-arrow bg-[#d32f2f] text-white rounded-pill w-10 h-10 d-flex align-items-center justify-content-center  transition-all duration-300 hover:translate-x-2 z-50'>
 			<FaArrowRight />
 		</button>
 	);
@@ -29,7 +29,7 @@ const PrevArrow = ({ onClick, style }) => {
 		<button
 			onClick={onClick}
 			style={{ ...style, position: 'absolute', bottom: '50%', right: '100%' }}
-			className='bg-[#d32f2f] text-white rounded-pill w-10 h-10 d-flex align-items-center justify-content-center transition-all duration-300 hover:-translate-x-2'>
+			className='custom-prev-arrow bg-[#d32f2f] text-white rounded-pill w-10 h-10 d-flex align-items-center justify-content-center transition-all duration-300 hover:-translate-x-2 z-50'>
 			<FaArrowLeft />
 		</button>
 	);
@@ -117,7 +117,7 @@ const NewsSection = () => {
 	return (
 		<section
 			id='news'
-			className='py-8 bg-gray-100'>
+			className='pt-5 pb-5 bg-gray-100'>
 			<Container>
 				<div className='flex items-center gap-3 mb-3'>
 					<img
@@ -177,7 +177,7 @@ const NewsSection = () => {
 											</div>
 											<a
 												href='#'
-												className='flex items-center text-black text-sm hover:text-[#d32f2f] transition-colors duration-300'>
+												className='flex items-center text-black text-sm hover:text-[#d32f2f] transition-colors duration-300 gap-1'>
 												Read more <FaArrowRight className='ml-1' />
 											</a>
 										</div>

@@ -61,3 +61,17 @@ body {
 	border-radius: 12px;
 	box-shadow: 0 4px 30px rgba(32, 32, 32, 0.1);
 }
+
+.collapse {
+	visibility: visible;
+}
+
+@media (max-width: 768px) {
+	.custom-next-arrow {
+		left: 90% !important;
+	}
+
+	.custom-prev-arrow {
+		right: 90% !important;
+	}
+}
