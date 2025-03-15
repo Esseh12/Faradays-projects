@@ -20,7 +20,7 @@ const Testimonial = () => {
 						<img
 							src={testimonial_vector}
 							alt='Testimonial'
-							className='h-auto'
+							className='testimonial-vector'
 						/>
 					</div>
 					<p className='text-center fs-6'>
@@ -190,10 +190,9 @@ const Testimonial = () => {
 				</div>
 			</section>
 
-			{/* CSS for animations and transitions */}
+			{/* CSS for animations and responsive vector image */}
 			<style jsx>{`
 				.testimonial-card {
-					/* Fade in from bottom */
 					animation: fadeInUp 0.6s ease-out;
 					transition: transform 0.3s ease, box-shadow 0.3s ease;
 				}
@@ -210,6 +209,14 @@ const Testimonial = () => {
 						opacity: 1;
 						transform: translateY(0);
 					}
+				}
+				.testimonial-vector {
+					max-width: 100%;
+					height: auto;
+					transition: transform 0.3s ease;
+				}
+				.testimonial-vector:hover {
+					transform: scale(1.1);
 				}
 			`}</style>
 		</>
