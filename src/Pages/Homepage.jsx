@@ -1,6 +1,8 @@
 import OffcanvasNavbar from '../Components/Navbar';
-// import HeroSection from '../Components/Homepage/HeroSection';
-import HomeAbout from '../Components/Homepage/About';
+import HeroSection from '../Components/Homepage/Hero';
+import CommunitySection from '../Components/Homepage/Community';
+import FeaturedProjects from '../Components/Homepage/Featured';
+import Services from '../Components/Homepage/Services';
 import Testimonial from '../Components/Homepage/Testimonial';
 import NewsSection from '../Components/Homepage/news';
 import FAQ from '../Components/Homepage/Faq';
@@ -10,8 +12,11 @@ const Homepage = () => {
 	return (
 		<>
 			<OffcanvasNavbar />
-			{/* <HeroSection /> */}
-			<HomeAbout />
+			<HeroSection />
+			{/* <HomeAbout /> */}
+			<CommunitySection />
+			<FeaturedProjects />
+			<Services />
 			<Testimonial />
 			<NewsSection />
 			<FAQ />
