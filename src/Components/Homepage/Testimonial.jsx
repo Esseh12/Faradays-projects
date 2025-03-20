@@ -1,225 +1,181 @@
 import React from 'react';
-import { Row, Card, Col } from 'react-bootstrap';
-import testimonial_vector from '../../assets/Images/testimonial_vector.svg';
-import client_image from '../../assets/Images/client-Images.svg';
-import stars_group from '../../assets/Images/stars_group.svg';
-import client1 from '../../assets/Images/client1.svg';
-import client2 from '../../assets/Images/client2.svg';
-import client3 from '../../assets/Images/client3.svg';
-import client4 from '../../assets/Images/client4.svg';
+import { Row, Card, Col, Container } from 'react-bootstrap';
+import { FiTrendingUp, FiStar } from 'react-icons/fi';
 
 const Testimonial = () => {
+	const testimonials = [
+		{
+			id: 1,
+			name: 'John Doe',
+			role: 'Homeowner, Lagos',
+			text: "Faraday's solar installation transformed our energy consumption. We've cut our electricity bills by 70% while maintaining 24/7 power supply.",
+			rating: 5,
+			image: 'client1',
+		},
+		{
+			id: 2,
+			name: 'Jane Smith',
+			role: 'Business Owner, Abuja',
+			text: 'The hybrid inverter system has been a game-changer for our operations. Seamless transition between grid and solar power with zero downtime.',
+			rating: 5,
+			image: 'client2',
+		},
+		{
+			id: 3,
+			name: 'Robert Lee',
+			role: 'Energy Consultant, Kano',
+			text: 'Professional installation with premium components. Their 25-year performance guarantee gave us complete peace of mind.',
+			rating: 4,
+			image: 'client3',
+		},
+		{
+			id: 4,
+			name: 'Alice Brown',
+			role: 'Project Manager, Port Harcourt',
+			text: 'From consultation to installation, the team demonstrated unmatched expertise. Our solar array outperforms expectations daily.',
+			rating: 5,
+			image: 'client4',
+		},
+	];
+
 	return (
-		<>
-			<section className='container mx-auto px-4 pt-5 pb-5'>
-				<div className='d-flex flex-column align-items-center'>
-					<div className='d-flex align-items-center gap-3 mb-3'>
-						<h2 className='text-center fs-1 font-bold mb-6'>
-							What Our Clients Say
+		<section
+			className='py-5 position-relative'
+			style={{ backgroundColor: '#f9fafb' }}>
+			{/* Decorative Elements */}
+			<div
+				className='position-absolute top-0 start-0 w-100 h-100'
+				style={{
+					background: `linear-gradient(120deg, rgba(211,47,47,0.03) 0%, transparent 100%)`,
+					zIndex: 0,
+				}}
+			/>
+
+			<Container>
+				<div className='text-center mb-5 position-relative'>
+					<div className='d-inline-block position-relative'>
+						<h2
+							className='display-5 fw-bold mb-3'
+							style={{ color: '#0A2E5A' }}>
+							Client Experiences
+							<span style={{ color: '#d32f2f', marginLeft: '12px' }}>★</span>
 						</h2>
-						<img
-							src={testimonial_vector}
-							alt='Testimonial'
-							className='testimonial-vector'
-						/>
-					</div>
-					<p className='text-center fs-6'>
-						At Faradays projects we are not just building structures - we're
-						building relationships.
-						<br className='hidden md:block' /> Here's what some of our clients
-						have to say about their experiences with us.
-					</p>
-					<div className='d-flex align-items-center gap-3 mb-4'>
-						<img
-							src={client_image}
-							alt='clients'
-						/>
-						<div className='d-flex flex-column gap-3'>
-							<img
-								src={stars_group}
-								alt='stars rating 4.5'
-								className='h-auto'
-								style={{ width: '100px' }}
-							/>
-							<p>4.5/5 Rated by 300+ Professionals</p>
+						<div
+							className='position-absolute top-n5 end-n3'
+							style={{ zIndex: -1 }}>
+							<div className='bg-danger rounded-pill p-2 px-3 d-flex align-items-center'>
+								<FiStar className='text-white me-1' />
+								<span className='text-white small'>4.9/5 Rating</span>
+							</div>
 						</div>
 					</div>
-
-					<Row>
-						{/* Card 1 */}
-						<Col
-							md={6}
-							lg={6}
-							className='mb-4'>
-							<Card className='p-4 testimonial-card'>
-								<Row className='align-items-center'>
-									<Col
-										xs='auto'
-										className='mb-3'>
-										<img
-											src={client1}
-											alt='client 1'
-											style={{
-												width: '80px',
-												height: '80px',
-												objectFit: 'cover',
-												borderRadius: '50%',
-											}}
-										/>
-									</Col>
-									<Col>
-										<Card.Title className='fs-5'>John Doe</Card.Title>
-										<Card.Subtitle className='mb-2 text-muted fs-6'>
-											CEO, XYZ Company
-										</Card.Subtitle>
-										<Card.Text>
-											"Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Sed do eiusmod tempor incididunt ut labore et dolore magna
-											aliqua."
-										</Card.Text>
-									</Col>
-								</Row>
-							</Card>
-						</Col>
-
-						{/* Card 2 */}
-						<Col
-							md={6}
-							lg={6}
-							className='mb-4'>
-							<Card className='p-4 testimonial-card'>
-								<Row className='align-items-center'>
-									<Col
-										xs='auto'
-										className='mb-3'>
-										<img
-											src={client2}
-											alt='client 2'
-											style={{
-												width: '80px',
-												height: '80px',
-												objectFit: 'cover',
-												borderRadius: '50%',
-											}}
-										/>
-									</Col>
-									<Col>
-										<Card.Title className='fs-5'>Jane Smith</Card.Title>
-										<Card.Subtitle className='mb-2 text-muted fs-6'>
-											CFO, ABC Corp.
-										</Card.Subtitle>
-										<Card.Text>
-											"Pinnacle’s service exceeded our expectations. The
-											professionalism and attention to detail were outstanding."
-										</Card.Text>
-									</Col>
-								</Row>
-							</Card>
-						</Col>
-
-						{/* Card 3 */}
-						<Col
-							md={6}
-							lg={6}
-							className='mb-4'>
-							<Card className='p-4 testimonial-card'>
-								<Row className='align-items-center'>
-									<Col
-										xs='auto'
-										className='mb-3'>
-										<img
-											src={client3}
-											alt='client 3'
-											style={{
-												width: '80px',
-												height: '80px',
-												objectFit: 'cover',
-												borderRadius: '50%',
-											}}
-										/>
-									</Col>
-									<Col>
-										<Card.Title className='fs-5'>Robert Lee</Card.Title>
-										<Card.Subtitle className='mb-2 text-muted fs-6'>
-											COO, LMN Industries
-										</Card.Subtitle>
-										<Card.Text>
-											"Their dedication and innovative approach truly set them
-											apart. I highly recommend their services."
-										</Card.Text>
-									</Col>
-								</Row>
-							</Card>
-						</Col>
-
-						{/* Card 4 */}
-						<Col
-							md={6}
-							lg={6}
-							className='mb-4'>
-							<Card className='p-4 testimonial-card'>
-								<Row className='align-items-center'>
-									<Col
-										xs='auto'
-										className='mb-3'>
-										<img
-											src={client4}
-											alt='client 4'
-											style={{
-												width: '80px',
-												height: '80px',
-												objectFit: 'cover',
-												borderRadius: '50%',
-											}}
-										/>
-									</Col>
-									<Col>
-										<Card.Title className='fs-5'>Alice Brown</Card.Title>
-										<Card.Subtitle className='mb-2 text-muted fs-6'>
-											Director, PQR Solutions
-										</Card.Subtitle>
-										<Card.Text>
-											"The service and support were exceptional, and the results
-											were beyond our expectations."
-										</Card.Text>
-									</Col>
-								</Row>
-							</Card>
-						</Col>
-					</Row>
+					<p
+						className='lead text-muted mx-auto'
+						style={{ maxWidth: '600px' }}>
+						Join 300+ satisfied clients who've transformed their energy
+						consumption with our solar solutions
+					</p>
 				</div>
-			</section>
 
-			{/* CSS for animations and responsive vector image */}
-			<style jsx>{`
+				<Row className='g-4'>
+					{testimonials.map((testimonial) => (
+						<Col
+							key={testimonial.id}
+							md={6}
+							lg={3}>
+							<Card className='h-100 border-0 shadow-sm testimonial-card'>
+								<Card.Body className='p-4 position-relative'>
+									{/* Quote Icon */}
+									<FiTrendingUp
+										className='position-absolute top-0 end-0 m-3'
+										size={24}
+										style={{ color: 'rgba(211,47,47,0.2)' }}
+									/>
+
+									{/* Client Info */}
+									<div className='d-flex align-items-center mb-4'>
+										<div className='position-relative me-3'>
+											<img
+												src={testimonial.image}
+												alt={testimonial.name}
+												className='rounded-circle'
+												style={{
+													width: '64px',
+													height: '64px',
+													objectFit: 'cover',
+													border: '2px solid #d32f2f',
+												}}
+											/>
+										</div>
+										<div>
+											<h5
+												className='mb-1'
+												style={{ color: '#0A2E5A' }}>
+												{testimonial.name}
+											</h5>
+											<small className='text-muted'>{testimonial.role}</small>
+										</div>
+									</div>
+
+									{/* Rating */}
+									<div className='d-flex gap-1 mb-3'>
+										{[...Array(5)].map((_, i) => (
+											<FiStar
+												key={i}
+												size={18}
+												style={{
+													color: i < testimonial.rating ? '#d32f2f' : '#e0e0e0',
+												}}
+											/>
+										))}
+									</div>
+
+									{/* Testimonial Text */}
+									<Card.Text
+										className='text-secondary'
+										style={{ lineHeight: 1.6 }}>
+										{testimonial.text}
+									</Card.Text>
+								</Card.Body>
+							</Card>
+						</Col>
+					))}
+				</Row>
+			</Container>
+
+			<style
+				jsx
+				global>{`
 				.testimonial-card {
-					animation: fadeInUp 0.6s ease-out;
-					transition: transform 0.3s ease, box-shadow 0.3s ease;
+					transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+					background: #fff;
+					border-radius: 16px !important;
+					transform: translateY(0);
 				}
+
 				.testimonial-card:hover {
-					transform: translateY(-8px) scale(1.02);
-					box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+					transform: translateY(-8px);
+					box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
 				}
-				@keyframes fadeInUp {
-					from {
-						opacity: 0;
-						transform: translateY(20px);
-					}
-					to {
-						opacity: 1;
-						transform: translateY(0);
-					}
+
+				.testimonial-card::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					height: 4px;
+					background: linear-gradient(90deg, #d32f2f 0%, #ff6b6b 100%);
+					border-radius: 16px 16px 0 0;
+					opacity: 0;
+					transition: opacity 0.3s ease;
 				}
-				.testimonial-vector {
-					max-width: 100%;
-					height: auto;
-					transition: transform 0.3s ease;
-				}
-				.testimonial-vector:hover {
-					transform: scale(1.1);
+
+				.testimonial-card:hover::before {
+					opacity: 1;
 				}
 			`}</style>
-		</>
+		</section>
 	);
 };
 

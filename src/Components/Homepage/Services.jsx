@@ -1,177 +1,238 @@
 import React from 'react';
-import Slider from 'react-slick';
-import { Card, Container } from 'react-bootstrap';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import star_icon from '../../assets/Images/services-vector.svg';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import {
+	FiSun,
+	FiZap,
+	FiTool,
+	FiShield,
+	FiBarChart,
+	FiBattery,
+} from 'react-icons/fi';
 
-// Sample images from Pexels (replace with your own)
-const services = [
+const solarServices = [
 	{
-		id: 1,
-		title: 'Custom Homes',
-		description: 'Tailor-made homes designed to match your vision.',
-		image:
-			'https://images.pexels.com/photos/164522/pexels-photo-164522.jpeg?auto=compress&cs=tinysrgb&w=1600',
+		icon: <FiSun />,
+		title: 'Solar Installation',
+		features: [
+			'Residential & Commercial',
+			'Grid-Tie Systems',
+			'25-Year Warranty',
+		],
+		color: '#ff6b6b',
 	},
 	{
-		id: 2,
-		title: 'Community Dev',
-		description: 'Developing thriving, sustainable communities.',
-		image:
-			'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1600',
+		icon: <FiZap />,
+		title: 'Inverter Solutions',
+		features: ['Hybrid Systems', 'Battery Backup', 'Smart Monitoring'],
+		color: '#4ecdc4',
 	},
 	{
-		id: 3,
-		title: 'Renovations',
-		description: 'Transforming existing spaces into modern havens.',
-		image:
-			'https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg?auto=compress&cs=tinysrgb&w=1600',
+		icon: <FiBattery />,
+		title: 'Energy Storage',
+		features: ['Lithium-Ion Solutions', 'Off-Grid Ready', 'Load Management'],
+		color: '#45b7d1',
 	},
 	{
-		id: 4,
-		title: 'Smart Housing',
-		description: 'Innovative and automated solutions for modern living.',
-		image:
-			'https://images.pexels.com/photos/2287329/pexels-photo-2287329.jpeg?auto=compress&cs=tinysrgb&w=1600',
+		icon: <FiTool />,
+		title: 'Maintenance',
+		features: ['Performance Checks', 'Panel Cleaning', 'System Updates'],
+		color: '#ff9f43',
+	},
+	{
+		icon: <FiShield />,
+		title: 'Warranty',
+		features: ['Equipment Guarantee', 'Damage Protection', 'Priority Support'],
+		color: '#a55eea',
+	},
+	{
+		icon: <FiBarChart />,
+		title: 'Consulting',
+		features: ['Energy Audits', 'ROI Analysis', 'Custom Solutions'],
+		color: '#2ecc71',
 	},
 ];
 
 const Services = () => {
-	// react-slick settings
-	const settings = {
-		dots: false,
-		infinite: true,
-		speed: 700,
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 3000,
-		swipeToSlide: true,
-		responsive: [
-			{
-				breakpoint: 1200, // large screens
-				settings: {
-					slidesToShow: 3,
-				},
-			},
-			{
-				breakpoint: 992, // medium screens
-				settings: {
-					slidesToShow: 2,
-				},
-			},
-			{
-				breakpoint: 576, // small screens
-				settings: {
-					slidesToShow: 1,
-				},
-			},
-		],
-	};
-
 	return (
 		<section
 			className='py-5'
 			style={{
-				backgroundColor: '#f8f9fa', // Light gray background
+				background: 'linear-gradient(135deg, #001f3f, #003366)',
+				padding: '4rem 0',
 			}}>
 			<Container>
-				{/* Heading Section */}
-				<div className='text-center mb-4'>
-					<div className='d-flex align-items-center justify-content-center'>
-						<h2
-							style={{
-								color: '#000',
-								fontWeight: 'bold',
-								position: 'relative',
-								display: 'inline-block',
-							}}>
-							Quality service you get
-						</h2>
-						{/* Star icon next to heading */}
-						<img
-							src={star_icon}
-							alt='Star icon'
-							style={{
-								width: '24px',
-								height: '24px',
-								marginLeft: '8px',
-								transform: 'translateY(-2px)',
-							}}
-						/>
-					</div>
-
+				<div className='text-center mb-5'>
+					<h2
+						className='display-5 fw-bold mb-3'
+						style={{ color: '#e5e5e5' }}>
+						Premium Solar Services
+					</h2>
 					<p
-						className='text-muted mt-2'
-						style={{ maxWidth: '600px', margin: '0 auto' }}>
-						A pinnacle of service, with just the right balance of style and
-						technology.
+						className='text-[#e5e5e5] lead'
+						style={{ color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
+						Comprehensive solar solutions backed by industry-leading expertise
+						and cutting-edge technology.
 					</p>
 				</div>
 
-				{/* Carousel Section */}
-				<Slider {...settings}>
-					{services.map((service) => (
-						<div
-							key={service.id}
-							className='px-2'>
-							<Card className='service-card border-0 shadow-sm'>
-								<div className='img-wrapper'>
-									<Card.Img
-										variant='top'
-										src={service.image}
-										style={{
-											height: '220px',
-											objectFit: 'cover',
-										}}
-									/>
+				<Row className='g-4'>
+					{solarServices.map((service, index) => (
+						<Col
+							key={index}
+							md={6}
+							lg={4}>
+							<Card className='border-0 h-100 position-relative overflow-hidden service-card'>
+								{/* Decorative Corner Element */}
+								<div className='position-absolute end-0 top-0'>
+									<svg
+										width='80'
+										height='80'
+										viewBox='0 0 100 100'
+										style={{ color: service.color }}>
+										<path
+											fill='currentColor'
+											opacity='0.1'
+											d='M100,0 L100,100 L0,100 Z'
+										/>
+									</svg>
 								</div>
-								<Card.Body className='text-center'>
-									<Card.Title
-										className='mb-2'
-										style={{ color: '#d32f2f', fontWeight: 'bold' }}>
-										{service.title}
-									</Card.Title>
-									<Card.Text className='text-muted'>
-										{service.description}
-									</Card.Text>
+
+								<Card.Body className='p-4'>
+									<div className='d-flex align-items-start mb-3'>
+										{/* Icon Container */}
+										<div
+											className='p-3 rounded-4 me-3 service-icon'
+											style={{
+												background: `linear-gradient(135deg, ${service.color} 0%, ${service.color}33 100%)`,
+												boxShadow: `0 4px 12px ${service.color}33`,
+											}}>
+											{React.cloneElement(service.icon, {
+												size: 24,
+												style: { color: 'white' },
+											})}
+										</div>
+
+										<div>
+											<h5
+												className='position-relative mb-2'
+												style={{
+													color: '#0A2E5A',
+													fontWeight: '500',
+													paddingBottom: '8px',
+												}}>
+												{service.title}
+												<span
+													className='title-underline'
+													style={{ backgroundColor: service.color }}
+												/>
+											</h5>
+											<ul
+												className='list-unstyled mb-0'
+												style={{ fontSize: '0.9rem' }}>
+												{service.features.map((feature, idx) => (
+													<li
+														key={idx}
+														className='d-flex align-items-center mb-2'
+														style={{ color: '#64748b' }}>
+														<span
+															className='rounded-circle me-2'
+															style={{
+																width: '6px',
+																height: '6px',
+																backgroundColor: service.color,
+															}}
+														/>
+														{feature}
+													</li>
+												))}
+											</ul>
+										</div>
+									</div>
+
+									{/* Feature Count Badge */}
+									<div
+										className='badge m-3 position-absolute rounded-pill end-0 top-0'
+										style={{
+											backgroundColor: service.color,
+											color: 'white',
+											fontSize: '0.75rem',
+											padding: '4px 8px',
+										}}>
+										{service.features.length} Features
+									</div>
 								</Card.Body>
 							</Card>
-						</div>
+						</Col>
 					))}
-				</Slider>
+				</Row>
 			</Container>
 
-			{/* Animations & Hover Effects */}
-			<style jsx>{`
+			{/* Global Styles */}
+			<style
+				jsx
+				global>{`
 				.service-card {
-					transition: transform 0.4s ease, box-shadow 0.4s ease;
-					border-radius: 12px;
-					overflow: hidden;
+					transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+					background: white;
+					border-radius: 16px !important;
+					box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+					transform: translateY(0);
 				}
+
 				.service-card:hover {
-					transform: translateY(-6px) scale(1.02);
-					box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+					transform: translateY(-8px);
+					box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 				}
-				.img-wrapper {
-					overflow: hidden;
-					position: relative;
+
+				.service-icon {
+					transition: all 0.3s ease;
 				}
-				.img-wrapper::after {
+
+				.service-card:hover .service-icon {
+					transform: rotate(8deg) scale(1.1);
+				}
+
+				.title-underline {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 0;
+					height: 2px;
+					transition: width 0.3s ease;
+				}
+
+				.service-card:hover .title-underline {
+					width: 48px;
+				}
+
+				.service-card::before {
 					content: '';
 					position: absolute;
-					inset: 0;
-					background: linear-gradient(
-						45deg,
-						rgba(211, 47, 47, 0.1),
-						rgba(211, 47, 47, 0.3)
-					);
+					top: -1px;
+					left: -1px;
+					right: -1px;
+					bottom: -1px;
+					border-radius: 16px;
+					z-index: -1;
+					background: linear-gradient(45deg, #ff6b6b33, transparent 50%);
 					opacity: 0;
-					transition: opacity 0.4s ease;
+					transition: opacity 0.3s ease;
 				}
-				.service-card:hover .img-wrapper::after {
+
+				.service-card:hover::before {
 					opacity: 1;
+				}
+
+				@media (max-width: 768px) {
+					section.py-5 {
+						padding: 2rem 0;
+					}
+					h3 {
+						font-size: 1.75rem !important;
+					}
+					p {
+						font-size: 0.85rem !important;
+					}
 				}
 			`}</style>
 		</section>

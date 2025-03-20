@@ -1,95 +1,137 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import imageGroup from '../../assets/Images/client-Images.svg';
-import communityVector from '../../assets/Images/community-vector.svg';
+import { FaStar as StarIcon } from 'react-icons/fa';
+import client_group from '../../assets/Images/client-Images.svg';
 
 const CommunitySection = () => {
+	const navigate = useNavigate();
 	return (
 		<section
 			style={{
-				backgroundColor: '#d32f2f',
+				background: 'linear-gradient(135deg, #001f3f, #003366)',
 				color: '#fff',
+				padding: '4rem 0',
 				position: 'relative',
 				overflow: 'hidden',
 			}}>
-			<Container className='py-5'>
-				<Row className='justify-content-center text-center'>
+			<Container>
+				<Row className='align-items-center'>
+					{/* Left Column: Text Content */}
 					<Col
-						md={10}
-						lg={8}>
-						<h1
-							style={{
-								fontWeight: 'bold',
-								fontSize: '2.5rem',
-								lineHeight: '1.2',
-							}}>
-							We’re building communities.
-						</h1>
-						<p
-							className='mt-3'
-							style={{
-								fontSize: '1.1rem',
-								maxWidth: '600px',
-								margin: '0 auto',
-							}}>
-							With a mission to revolutionize real estate by delivering
-							sustainable and innovative solutions for modern living, we aim to
-							create vibrant communities where everyone can thrive.
-						</p>
-						<div className='mt-4'>
-							<Button
-								variant='light'
-								size='lg'>
-								Learn More About Us
-							</Button>
-						</div>
-						{/* Container for images */}
-						<div className='d-flex justify-content-center align-items-center mt-4 position-relative'>
-							{/* Community vector with animation */}
-							<img
-								src={communityVector}
-								alt='Community Vector'
+						md={6}
+						className='mb-4 mb-md-0'>
+						<div style={{ zIndex: 2, position: 'relative' }}>
+							<h1
 								style={{
-									position: 'absolute',
-									width: '400px', // Adjust width as needed
-									height: 'auto',
-									zIndex: 1,
-									left: '50%',
-									transform: 'translate(-150%, 30%)',
-									animation: 'slideIn 1s ease-out forwards',
-								}}
-							/>
-							{/* Foreground image */}
+									fontSize: '2.75rem',
+									fontWeight: '700',
+									lineHeight: 1.2,
+									marginBottom: '1.5rem',
+								}}>
+								Empowering <span style={{ color: '#66b2ff' }}>Communities</span>
+								<br />
+								With Renewable Energy
+							</h1>
+							<p
+								style={{
+									fontSize: '1.125rem',
+									maxWidth: '500px',
+									marginBottom: '2rem',
+								}}>
+								Join us as we transform energy solutions and build a sustainable
+								future for everyone.
+							</p>
+							<div className='d-flex flex-wrap gap-3 mb-4'>
+								<Button
+									variant='light'
+									size='lg'
+									className='fw-bold px-4 py-2'
+									style={{ color: '#001f3f' }}
+									onClick={() => navigate('/about')}>
+									Get Started
+								</Button>
+								<Button
+									variant='outline-light'
+									size='lg'
+									className='fw-bold px-4 py-2'
+									onClick={() => navigate('/projects')}>
+									Learn More
+								</Button>
+							</div>
+							<div className='d-flex align-items-center gap-2'>
+								<div className='d-flex flex-column align-items-center gap-2'>
+									<img
+										src={client_group}
+										alt='Client Group'
+									/>
+								</div>
+
+								<div className='d-flex flex-column gap-2'>
+									<div className='d-flex'>
+										{[...Array(5)].map((_, i) => (
+											<StarIcon
+												key={i}
+												style={{ width: '24px', fill: '#ffd700' }}
+											/>
+										))}
+									</div>
+									<div className='d-flex align-items-center gap-2'>
+										<span style={{ fontWeight: 'bold', fontSize: '1.125rem' }}>
+											(4.9/5)
+										</span>
+										<small
+											className='d-block'
+											style={{ opacity: 0.9 }}>
+											Customer Rating
+										</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Col>
+					{/* Right Column: Animated Image */}
+					<Col md={6}>
+						<div style={{ textAlign: 'center' }}>
 							<img
-								src={imageGroup}
-								alt='User group'
-								style={{ position: 'relative', zIndex: 2 }}
+								src='https://images.pexels.com/photos/8853502/pexels-photo-8853502.jpeg?auto=compress&cs=tinysrgb&w=600'
+								alt='Renewable Energy'
+								className='rounded shadow animated-image img-fluid'
+								style={{ maxWidth: '100%', height: 'auto' }}
 							/>
 						</div>
 					</Col>
 				</Row>
 			</Container>
-			{/* Decorative shape & Animation */}
-			<style jsx>{`
-				section::before {
-					content: '';
-					position: absolute;
-					top: -100px;
-					right: -100px;
-					width: 300px;
-					height: 300px;
-					background: rgba(255, 255, 255, 0.1);
-					border-radius: 50%;
-					z-index: 0;
-				}
-				@keyframes slideIn {
+
+			{/* Animation & Responsive Styles */}
+			<style
+				jsx
+				global>{`
+				@keyframes float {
 					0% {
-						opacity: 0;
-						transform: translate(-150%, 30%);
+						transform: translateY(0);
+					}
+					50% {
+						transform: translateY(-10px);
 					}
 					100% {
-						opacity: 1;
-						transform: translate(-50%, 30%);
+						transform: translateY(0);
+					}
+				}
+				.animated-image {
+					animation: float 3s ease-in-out infinite;
+				}
+				@media (max-width: 768px) {
+					h1 {
+						font-size: 2rem !important;
+					}
+					p {
+						font-size: 1rem !important;
+					}
+					.btn {
+						font-size: 0.9rem !important;
+						padding: 0.5rem 1rem !important;
 					}
 				}
 			`}</style>
