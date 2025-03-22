@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const AboutHero = () => {
+	const navigate = useNavigate();
 	const [imageLoaded, setImageLoaded] = useState(false);
+	const bgImage =
+		'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-SolarPanels-01-Desktop';
 
 	useEffect(() => {
 		const img = new Image();
-		img.src =
-			'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-SolarPanels-01-Desktop';
+		img.src = bgImage;
 		img.onload = () => setImageLoaded(true);
-	}, []);
+	}, [bgImage]);
 
 	return (
-		<section className={`hero-section ${imageLoaded ? 'image-loaded' : ''}`}>
+		<section
+			className={`hero-section ${imageLoaded ? 'image-loaded' : ''}`}
+			style={{
+				minHeight: '100vh',
+				display: 'flex',
+				alignItems: 'center',
+				padding: '8rem 0 6rem',
+				position: 'relative',
+				backgroundColor: '#0a1929', // fallback color
+			}}>
 			<div className='hero-gradient-overlay'></div>
-
 			<Container>
 				<Row className='hero-content-row'>
 					<Col
@@ -85,10 +96,16 @@ const AboutHero = () => {
 							</div>
 
 							<div className='hero-cta-container'>
-								<button className='hero-cta primary-btn'>
+								<button
+									className='hero-cta primary-btn'
+									onClick={() => navigate('/projects')}>
 									Explore Solutions
 								</button>
-								<button className='hero-cta secondary-btn'>Contact Us</button>
+								<button
+									className='hero-cta secondary-btn'
+									onClick={() => navigate('/contact-us')}>
+									Contact Us
+								</button>
 							</div>
 						</motion.div>
 					</Col>
@@ -127,7 +144,7 @@ const AboutHero = () => {
 								<h3>Our Commitment</h3>
 								<p>
 									Industry-leading 25-year performance guarantee with
-									sustainable, eco-friendly solutions
+									sustainable, eco-friendly solutions.
 								</p>
 								<div className='card-badges'>
 									<span className='badge'>ISO Certified</span>
@@ -164,7 +181,7 @@ const AboutHero = () => {
 					display: flex;
 					align-items: center;
 					padding: 8rem 0 6rem;
-					background-color: #0a1929; /* Fallback color before image loads */
+					background-color: #0a1929;
 					transition: opacity 0.5s ease;
 				}
 
@@ -175,7 +192,7 @@ const AboutHero = () => {
 					left: 0;
 					width: 100%;
 					height: 100%;
-					background-image: url('https://your-image-url.com/solar-panels-hero.jpg'); /* Replace with your actual image */
+					background-image: url('${bgImage}');
 					background-size: cover;
 					background-position: center;
 					opacity: 0;
@@ -211,11 +228,11 @@ const AboutHero = () => {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
+					padding-right: 2rem;
 				}
 
 				.hero-text {
 					color: white;
-					padding-right: 2rem;
 				}
 
 				.hero-text h1 {

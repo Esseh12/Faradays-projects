@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { FiStar } from 'react-icons/fi';
 
 // Sample testimonials data
@@ -38,160 +38,130 @@ const testimonials = [
 	},
 ];
 
-const TestimonialsGrid = () => {
+const Testimonials = () => {
 	return (
 		<section
-			className='py-6 testimonial-section'
 			style={{
-				background: 'linear-gradient(150deg, #f0f8ff 0%, #e6f0ff 100%)',
-				position: 'relative',
-				overflow: 'hidden',
+				background: '#f9f9f9',
 				padding: '4rem 0',
 			}}>
 			<Container>
-				{/* Section Header */}
+				{/* Section Title */}
 				<div className='text-center mb-5'>
 					<h2
-						className='mb-3 section-title'
 						style={{
-							color: '#1e3a8a',
+							color: '#333',
 							fontWeight: 700,
 							fontSize: '2.5rem',
-							letterSpacing: '-0.8px',
+							marginBottom: '0.5rem',
 						}}>
-						Powering Nigerian Homes & Businesses
+						TESTIMONIALS
 					</h2>
 					<p
-						className='section-subtitle'
 						style={{
-							color: '#475569',
-							fontSize: '1.1rem',
-							maxWidth: '700px',
+							color: '#555',
+							maxWidth: '600px',
 							margin: '0 auto',
 						}}>
-						Join 800+ satisfied clients in Nigeria's solar revolution
+						Subscribe to our newsletter for more success stories and energy
+						insights
 					</p>
 				</div>
 
 				{/* Testimonials Grid */}
 				<Row className='g-4'>
-					{testimonials.map((testimonial) => (
+					{testimonials.map((t) => (
 						<Col
-							key={testimonial.id}
+							key={t.id}
 							xs={12}
-							md={6}
-							lg={3}>
-							<Card className='border-0 h-100 shadow-hover testimonial-card'>
-								<Card.Body className='p-4'>
-									{/* Client Image & Info */}
-									<div className='d-flex align-items-center mb-3'>
-										<img
-											src={testimonial.image}
-											alt={testimonial.name}
-											className='client-avatar'
+							md={6}>
+							<div className='h-100 p-4 text-center testimonial-card'>
+								{/* Avatar */}
+								<div className='avatar-wrapper mb-3 mx-auto'>
+									<img
+										src={t.image}
+										alt={t.name}
+										style={{
+											width: '100px',
+											height: '100px',
+											objectFit: 'cover',
+											borderRadius: '50%',
+											border: '4px solid #fff',
+											boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+										}}
+									/>
+								</div>
+
+								{/* Star Rating */}
+								<div className='d-flex justify-content-center gap-2 mb-3'>
+									{[...Array(5)].map((_, i) => (
+										<FiStar
+											key={i}
 											style={{
-												width: '72px',
-												height: '72px',
-												objectFit: 'cover',
-												borderRadius: '50%',
-												border: '3px solid #fff',
-												boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+												color: i < t.rating ? '#ffc107' : '#ddd',
+												marginRight: '2px',
 											}}
 										/>
-										<div className='ms-3'>
-											<h5 className='text-primary fw-bold mb-0'>
-												{testimonial.name}
-											</h5>
-											<p className='text-muted mb-0 small'>
-												{testimonial.role}
-											</p>
-										</div>
-									</div>
+									))}
+								</div>
 
-									{/* Star Rating */}
-									<div
-										className='mb-3 rating-stars'
-										style={{
-											display: 'flex',
-											justifyContent: 'center',
-											gap: '0.25rem',
-											marginBottom: '1.5rem',
-											color: '#cbd5e1',
-										}}>
-										{[...Array(5)].map((_, i) => (
-											<FiStar
-												key={i}
-												className={i < testimonial.rating ? 'filled' : ''}
-												style={
-													i < testimonial.rating
-														? { color: '#f59e0b', marginRight: '2px' }
-														: { marginRight: '2px' }
-												}
-											/>
-										))}
-									</div>
+								{/* Testimonial Text */}
+								<p
+									style={{
+										color: '#555',
+										fontStyle: 'italic',
+										lineHeight: '1.6',
+									}}>
+									"{t.text}"
+								</p>
 
-									{/* Testimonial Text */}
-									<p
-										className='testimonial-text'
-										style={{
-											color: '#475569',
-											lineHeight: 1.7,
-											fontSize: '1rem',
-											margin: 0,
-											textAlign: 'left',
-										}}>
-										"{testimonial.text}"
-									</p>
-								</Card.Body>
-							</Card>
+								{/* Client Info */}
+								<h5
+									style={{ color: '#333', fontWeight: 600, marginTop: '1rem' }}>
+									{t.name}
+								</h5>
+								<p
+									style={{
+										color: '#999',
+										fontSize: '0.9rem',
+										marginTop: '0.25rem',
+									}}>
+									{t.role}
+								</p>
+							</div>
 						</Col>
 					))}
 				</Row>
 			</Container>
 
-			{/* Component Styles */}
+			{/* Custom Styles */}
 			<style jsx>{`
-				.testimonial-section {
-					background: linear-gradient(150deg, #f0f8ff 0%, #e6f0ff 100%);
-				}
 				.testimonial-card {
-					background: white;
-					border-radius: 1.5rem;
-					padding: 2rem;
-					height: 100%;
-					transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-					box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-					position: relative;
-					overflow: hidden;
+					background: #fff;
+					border-radius: 8px;
+					box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+					transition: transform 0.3s ease, box-shadow 0.3s ease;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
 				}
+
 				.testimonial-card:hover {
-					transform: translateY(-8px);
-					box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+					transform: translateY(-5px);
+					box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 				}
-				@media (max-width: 992px) {
-					.client-avatar {
-						height: 200px;
-					}
+
+				.avatar-wrapper {
+					width: 100px;
+					height: 100px;
 				}
+
 				@media (max-width: 768px) {
-					.section-title {
-						font-size: 2rem;
+					h2 {
+						font-size: 2rem !important;
 					}
 					.testimonial-card {
-						border-radius: 1rem;
-						padding: 1.5rem;
-					}
-					.client-avatar {
-						height: 180px;
-					}
-					.testimonial-text {
-						font-size: 0.95rem;
-					}
-				}
-				@media (max-width: 576px) {
-					.client-avatar {
-						height: 160px;
+						padding: 2rem 1.5rem !important;
 					}
 				}
 			`}</style>
@@ -199,4 +169,4 @@ const TestimonialsGrid = () => {
 	);
 };
 
-export default TestimonialsGrid;
+export default Testimonials;
