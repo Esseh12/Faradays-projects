@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';
 import PartnersSection from '../Partners';
+import avatar_one from '../../assets/Images/avatar_one.svg';
+import avatar_two from '../../assets/Images/avatar_two.svg';
 
 const AboutSection = () => {
 	const [visibleStats, setVisibleStats] = useState(false);
@@ -105,14 +107,14 @@ const AboutSection = () => {
 			author: 'Johnathan Blake',
 			role: 'CTO, Global Energy Consortium',
 			company: 'Schneider Electric',
-			image: '/path-to-johnathan-image.jpg',
+			image: avatar_one,
 		},
 		{
 			text: 'The precision of their photovoltaic systems revolutionized our urban infrastructure.',
 			author: 'Dr. Emily Zhou',
 			role: 'Director of Sustainability',
 			company: 'ZTE Smart Cities',
-			image: '/path-to-emily-image.jpg',
+			image: avatar_two,
 		},
 	];
 

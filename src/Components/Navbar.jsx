@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import logo_img from '../assets/Images/Faraday Logo - Olusesan Oloruntola 1.svg';
 
 const navLinks = [
@@ -39,7 +40,8 @@ const OffcanvasNavbar = () => {
 			onToggle={toggleNav}>
 			<Container>
 				<Navbar.Brand
-					href='/'
+					as={Link}
+					to='/'
 					className='d-flex align-items-center gap-2'>
 					<img
 						src={logo_img}
@@ -74,7 +76,8 @@ const OffcanvasNavbar = () => {
 						{navLinks.map((link) => (
 							<Nav.Link
 								key={link.path}
-								href={link.path}
+								as={Link}
+								to={link.path}
 								className='position-relative custom-nav-link fw-medium'
 								onClick={() => setIsOpen(false)}>
 								{link.name}
@@ -83,7 +86,9 @@ const OffcanvasNavbar = () => {
 						))}
 					</Nav>
 					<Nav>
-						<Nav.Link href='#contact'>
+						<Nav.Link
+							as={Link}
+							to='/contact'>
 							<Button
 								className='btn-hover-effect'
 								style={{ backgroundColor: '#D32F2F', borderColor: '#D32F2F' }}>
