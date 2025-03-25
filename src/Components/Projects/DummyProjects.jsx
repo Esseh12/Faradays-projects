@@ -5,6 +5,35 @@
 
 const projects = [];
 
+// Curated image IDs from Pexels for each category
+
+// Solar projects: 7 images
+const solarImageIds = [
+	2113560, // solar panels on roof
+	2179035, // array of solar panels
+	1499692, // sunlight on solar panels
+	1650031, // solar panels in field
+	327533, // close-up of solar panel
+	2091168, // modern solar installation
+	2063597, // solar panels with blue sky
+];
+
+// Inverter projects: 5 images
+const inverterImageIds = [
+	2591804, // inverter device on table
+	2099691, // inverter close-up
+	3064072, // industrial inverter setup
+	2796678, // inverter with digital display
+	3015519, // inverter integrated into system
+];
+
+// Battery projects: 3 images
+const batteryImageIds = [
+	3261031, // battery storage facility
+	3536683, // modern battery setup
+	2968792, // close-up of battery units
+];
+
 // Create 7 Solar projects (IDs 1-7)
 for (let i = 0; i < 7; i++) {
 	const id = i + 1;
@@ -13,10 +42,8 @@ for (let i = 0; i < 7; i++) {
 	const date = new Date(2024, i % 12, (i % 28) + 1).toISOString().split('T')[0];
 	const client = 'Green Horizons Inc.';
 	const excerpt = `Faraday provided a state-of-the-art solar installation for a leading renewable energy client. This project enhanced energy efficiency and reduced carbon footprint.`;
-	// Use image IDs starting at 201 for Solar projects
-	const image = `https://images.pexels.com/photos/${201 + i}/pexels-photo-${
-		201 + i
-	}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
+	const imageId = solarImageIds[i];
+	const image = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
 	const content = `
     <h2>Project Overview</h2>
     <p>In project #${
@@ -51,10 +78,8 @@ for (let i = 0; i < 5; i++) {
 		.split('T')[0];
 	const client = 'Innovative Energy Solutions';
 	const excerpt = `A comprehensive inverter integration ensured seamless DC to AC conversion, maximizing system performance and reliability.`;
-	// Use image IDs starting at 251 for Inverter projects
-	const image = `https://images.pexels.com/photos/${251 + i}/pexels-photo-${
-		251 + i
-	}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
+	const imageId = inverterImageIds[i];
+	const image = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
 	const content = `
     <h2>Project Details</h2>
     <p>Project #${
@@ -87,10 +112,8 @@ for (let i = 0; i < 3; i++) {
 		.split('T')[0];
 	const client = 'Sustainable Future Co.';
 	const excerpt = `Faraday delivered robust battery storage solutions to ensure uninterrupted power supply and efficient energy management.`;
-	// Use image IDs starting at 301 for Battery projects
-	const image = `https://images.pexels.com/photos/${301 + i}/pexels-photo-${
-		301 + i
-	}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
+	const imageId = batteryImageIds[i];
+	const image = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
 	const content = `
     <h2>Project Insight</h2>
     <p>In project #${

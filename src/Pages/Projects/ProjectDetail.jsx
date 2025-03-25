@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
+import OffcanvasNavbar from '../../Components/Navbar';
+import Footer from '../../Components/Footer';
 import projectsData from '../../Components/Projects/DummyProjects';
 
 const ProjectDetail = () => {
@@ -23,124 +25,250 @@ const ProjectDetail = () => {
 	if (!project) return <div>Loading...</div>;
 
 	return (
-		<div className='project-detail'>
-			<section className='project-hero'>
-				<img
-					src={project.image}
-					alt={project.title}
-				/>
-			</section>
+		<>
+			<OffcanvasNavbar />
 
-			<Container>
-				<article className='project-content'>
-					<div className='text-center meta'>
-						<span className='category'>{project.category}</span>
-						<h1>{project.title}</h1>
-						<div className='client-date'>
-							<span>{project.client}</span>
-							<span>{project.date}</span>
+			<div className='newspaper-project-detail'>
+				<Container>
+					{/* Masthead */}
+					<header className='masthead'>
+						<h1 className='project-title'>{project.title}</h1>
+						<div className='byline'>
+							<span className='category'>{project.category}</span>
+							<span className='separator'>|</span>
+							<span className='client'>{project.client}</span>
+							<span className='separator'>|</span>
+							<span className='date'>{project.date}</span>
 						</div>
+					</header>
+
+					{/* Main Content */}
+					<div className='content-wrapper'>
+						<div className='main-content'>
+							{/* Hero Image */}
+							<figure className='hero-image'>
+								<img
+									src={project.image}
+									alt={project.title}
+								/>
+								<figcaption>{project.title}</figcaption>
+							</figure>
+
+							{/* Article Content */}
+							<article
+								className='project-article'
+								dangerouslySetInnerHTML={{ __html: project.content }}
+							/>
+
+							{/* Navigation */}
+							<div className='article-footer'>
+								<Link
+									to='/projects'
+									className='back-link'>
+									← Back to Projects
+								</Link>
+							</div>
+						</div>
+
+						{/* Sidebar */}
+						<aside className='sidebar'>
+							{relatedProjects.length > 0 && (
+								<div className='related-stories'>
+									<h3>Related Stories</h3>
+									{relatedProjects.map((proj) => (
+										<Link
+											key={proj.id}
+											to={`/projects/${proj.id}`}
+											className='related-story'>
+											<img
+												src={proj.image}
+												alt={proj.title}
+											/>
+											<h4>{proj.title}</h4>
+										</Link>
+									))}
+								</div>
+							)}
+						</aside>
 					</div>
+				</Container>
 
-					<div
-						className='content'
-						dangerouslySetInnerHTML={{ __html: project.content }}
-					/>
+				<style jsx>{`
+					/* Newspaper-style Typography and Layout */
+					:root {
+						--newspaper-text: 'Merriweather', serif;
+						--headline-font: 'Playfair Display', serif;
+						--primary-text-color: #2c3e50;
+						--secondary-text-color: #34495e;
+						--accent-color: #2980b9;
+						--background-color: #f4f4f4;
+						--border-color: #bdc3c7;
+					}
 
-					<div className='navigation text-center'>
-						<Link to='/projects'>Back to Projects</Link>
-					</div>
-				</article>
+					.newspaper-project-detail {
+						font-family: var(--newspaper-text);
+						background-color: var(--background-color);
+						color: var(--primary-text-color);
+						line-height: 1.7;
+						/* Add top margin to prevent overlap with sticky/fixed navbar */
+						margin-top: 6rem; /* Default top margin for medium+ screens */
+						padding-bottom: 2rem;
+					}
 
-				{relatedProjects.length > 0 && (
-					<section className='border-top mt-5 pt-3 related-projects'>
-						<h2>Related Projects</h2>
-						<Row>
-							{relatedProjects.map((proj) => (
-								<Col
-									md={4}
-									key={proj.id}>
-									<Link
-										to={`/projects/${proj.id}`}
-										className='related-project'>
-										<img
-											src={proj.image}
-											alt={proj.title}
-										/>
-										<h3>{proj.title}</h3>
-									</Link>
-								</Col>
-							))}
-						</Row>
-					</section>
-				)}
-			</Container>
+					/* Masthead */
+					.masthead {
+						border-bottom: 3px solid black;
+						margin-bottom: 2rem;
+						padding-bottom: 1rem;
+						text-align: center;
+					}
 
-			<style jsx>{`
-				.project-detail {
-					padding: 4rem 0;
-				}
-				.project-hero img {
-					width: 100%;
-					height: 400px;
-					object-fit: cover;
-					margin-bottom: 2rem;
-				}
-				.project-content {
-					max-width: 800px;
-					margin: 0 auto;
-				}
-				.meta .category {
-					background: var(--primary-color);
-					color: white;
-					padding: 0.5rem 1rem;
-					border-radius: 30px;
-					font-size: 0.9rem;
-					margin-bottom: 1rem;
-				}
-				h1 {
-					font-size: 2.5rem;
-					margin: 1.5rem 0;
-					color: var(--secondary-color);
-				}
-				.client-date {
-					display: flex;
-					justify-content: center;
-					gap: 1rem;
-					color: var(--text-light);
-					font-size: 0.9rem;
-				}
-				.content {
-					line-height: 1.7;
-					font-size: 1.1rem;
-					color: var(--text-color);
-				}
-				.navigation {
-					margin: 2rem 0;
-				}
-				.navigation a {
-					color: var(--primary-color);
-					font-weight: bold;
-				}
-				.related-projects h2 {
-					margin-bottom: 1rem;
-					color: var(--secondary-color);
-				}
-				.related-project img {
-					height: 200px;
-					width: 100%;
-					object-fit: cover;
-					border-radius: 0.5rem;
-					margin-bottom: 0.5rem;
-				}
-				:global(:root) {
-					--primary-color: #0062cc;
-					--secondary-color: #004976;
-					--text-color: #333;
-					--text-light: #6c757d;
-				}
-			`}</style>
-		</div>
+					.project-title {
+						font-family: var(--headline-font);
+						font-size: 3rem;
+						color: black;
+						margin-bottom: 0.5rem;
+					}
+
+					.byline {
+						font-size: 0.9rem;
+						color: var(--secondary-text-color);
+						text-transform: uppercase;
+						letter-spacing: 1px;
+					}
+
+					.byline .separator {
+						margin: 0 10px;
+						color: var(--border-color);
+					}
+
+					/* Content Wrapper */
+					.content-wrapper {
+						display: flex;
+						gap: 2rem;
+					}
+
+					.main-content {
+						flex: 3;
+					}
+
+					.sidebar {
+						flex: 1;
+						border-left: 1px solid var(--border-color);
+						padding-left: 1rem;
+					}
+
+					/* Hero Image */
+					.hero-image {
+						margin-bottom: 2rem;
+					}
+
+					.hero-image img {
+						width: 100%;
+						height: 400px;
+						object-fit: cover;
+					}
+
+					.hero-image figcaption {
+						font-style: italic;
+						text-align: center;
+						margin-top: 0.5rem;
+						color: var(--secondary-text-color);
+					}
+
+					/* Article Styling */
+					.project-article {
+						column-count: 2;
+						column-gap: 2rem;
+						font-size: 1rem;
+					}
+
+					.project-article p {
+						margin-bottom: 1rem;
+						text-indent: 1.5rem;
+					}
+
+					.project-article p:first-of-type::first-letter {
+						float: left;
+						font-size: 4rem;
+						line-height: 0.8;
+						padding-right: 0.5rem;
+						color: var(--accent-color);
+						font-weight: bold;
+					}
+
+					/* Related Stories */
+					.related-stories h3 {
+						border-bottom: 2px solid black;
+						padding-bottom: 0.5rem;
+						margin-bottom: 1rem;
+					}
+
+					.related-story {
+						display: block;
+						margin-bottom: 1rem;
+						text-decoration: none;
+						color: var(--primary-text-color);
+					}
+
+					.related-story img {
+						width: 100%;
+						height: 200px;
+						object-fit: cover;
+						margin-bottom: 0.5rem;
+					}
+
+					.related-story h4 {
+						font-size: 1.1rem;
+						margin: 0;
+					}
+
+					/* Article Footer */
+					.article-footer {
+						margin-top: 2rem;
+						text-align: center;
+						border-top: 1px solid var(--border-color);
+						padding-top: 1rem;
+					}
+
+					.back-link {
+						color: var(--accent-color);
+						text-decoration: none;
+						font-weight: bold;
+					}
+
+					/* Responsive Adjustments */
+					@media (max-width: 992px) {
+						.newspaper-project-detail {
+							margin-top: 5rem; /* Slightly smaller margin on tablets */
+						}
+					}
+
+					@media (max-width: 768px) {
+						.newspaper-project-detail {
+							margin-top: 4rem; /* Smaller margin on mobile */
+						}
+
+						.content-wrapper {
+							flex-direction: column;
+						}
+
+						.sidebar {
+							border-left: none;
+							border-top: 1px solid var(--border-color);
+							padding-left: 0;
+							margin-top: 1rem;
+						}
+
+						.project-article {
+							column-count: 1;
+						}
+					}
+				`}</style>
+			</div>
+
+			<Footer />
+		</>
 	);
 };
 
