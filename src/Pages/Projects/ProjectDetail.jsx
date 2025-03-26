@@ -4,8 +4,16 @@ import { useParams, Link } from 'react-router-dom';
 import OffcanvasNavbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import projectsData from '../../Components/Projects/DummyProjects';
+import { color } from 'framer-motion';
 
 const ProjectDetail = () => {
+	const projectDetailStyle = {
+		navLinkDefaultColor: '#000', // black link color
+		defaultBg: 'bg-[#fff]',
+		scrolledBg: 'bg-[#e5e5e5]',
+		defaultNavLinkColor: '#000',
+	};
+
 	const { id } = useParams();
 	const [project, setProject] = useState(null);
 	const [relatedProjects, setRelatedProjects] = useState([]);
@@ -26,7 +34,7 @@ const ProjectDetail = () => {
 
 	return (
 		<>
-			<OffcanvasNavbar />
+			<OffcanvasNavbar styleProps={projectDetailStyle} />
 
 			<div className='newspaper-project-detail'>
 				<Container>
@@ -106,13 +114,15 @@ const ProjectDetail = () => {
 					}
 
 					.newspaper-project-detail {
-						font-family: var(--newspaper-text);
-						background-color: var(--background-color);
-						color: var(--primary-text-color);
-						line-height: 1.7;
+						// font-family: var(--newspaper-text);
+						// background-color: var(--background-color);
+						// color: var(--primary-text-color);
+						// line-height: 1.7;
+
 						/* Add top margin to prevent overlap with sticky/fixed navbar */
-						margin-top: 6rem; /* Default top margin for medium+ screens */
-						padding-bottom: 2rem;
+						margin-top: 4rem; /* Default top margin for medium+ screens */
+						padding-bottom: 3rem;
+						padding-top: 3rem;
 					}
 
 					/* Masthead */
