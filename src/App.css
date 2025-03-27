@@ -2,7 +2,7 @@
 @font-face {
 	font-family: 'clashDisplay';
 	src: local('clashDisplay'),
-		url('./assets/Fonts/ClashDisplay_Complete') format('opentype');
+		url('/Fonts/ClashDisplay_Complete.woff2') format('WEB');
 	font-weight: normal;
 	font-style: normal;
 }

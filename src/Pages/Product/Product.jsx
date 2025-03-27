@@ -148,12 +148,6 @@ const ProductPage = () => {
 										}`}
 										onClick={() => setActiveCategory(category.id)}>
 										{category.name}
-										{activeCategory === category.id && (
-											<motion.div
-												className='active-indicator'
-												layoutId='activeCategory'
-											/>
-										)}
 									</button>
 								))}
 							</div>
@@ -250,7 +244,9 @@ const ProductPage = () => {
 				</section>
 
 				<style jsx>{`
+					/* Ensure no horizontal overflow on small screens */
 					.product-page {
+						overflow-x: hidden;
 						--primary-color: #0062cc;
 						--secondary-color: #004976;
 						--accent-color: #00a3e0;
@@ -348,7 +344,7 @@ const ProductPage = () => {
 						box-shadow: var(--card-shadow);
 						margin-bottom: 2rem;
 						transition: var(--transition);
-						height: 420px;
+						/* Removed fixed height for auto height */
 					}
 					.featured-product-card:hover {
 						transform: translateY(-8px);
@@ -412,7 +408,8 @@ const ProductPage = () => {
 						overflow: hidden;
 						box-shadow: var(--card-shadow);
 						transition: var(--transition);
-						height: 450px;
+						/* Removed fixed height; auto height now */
+						padding-bottom: 1rem;
 					}
 					.product-card:hover {
 						transform: translateY(-8px);
@@ -422,7 +419,6 @@ const ProductPage = () => {
 						text-decoration: none;
 						color: inherit;
 						display: block;
-						height: 100%;
 					}
 					.product-image {
 						position: relative;
@@ -454,7 +450,6 @@ const ProductPage = () => {
 						padding: 1.5rem;
 						display: flex;
 						flex-direction: column;
-						height: calc(100% - 220px);
 					}
 					.product-info h3 {
 						margin: 0 0 1rem;
@@ -489,7 +484,6 @@ const ProductPage = () => {
 						display: flex;
 						flex-direction: column;
 						margin-bottom: 1rem;
-						flex-grow: 1;
 					}
 					.spec-item {
 						font-size: 0.85rem;
@@ -506,7 +500,6 @@ const ProductPage = () => {
 						font-weight: 500;
 						cursor: pointer;
 						transition: var(--transition);
-						width: 100%;
 						margin-top: auto;
 					}
 					.view-details-btn:hover {
@@ -628,6 +621,7 @@ const ProductPage = () => {
 							grid-template-columns: 1fr;
 						}
 						.product-card {
+							/* Auto height, ensuring content is not clipped */
 							height: auto;
 						}
 						.product-image {
