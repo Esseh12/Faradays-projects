@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import { FiStar } from 'react-icons/fi';
 
 // Sample testimonials data
@@ -40,131 +39,63 @@ const testimonials = [
 
 const Testimonials = () => {
 	return (
-		<section
-			style={{
-				background: '#f9f9f9',
-				padding: '4rem 0',
-			}}>
-			<Container>
+		<section className='bg-gradient-to-r from-blue-50 to-indigo-50 py-20'>
+			<div className='max-w-6xl mx-auto px-6'>
 				{/* Section Title */}
-				<div className='text-center mb-5'>
-					<h2
-						style={{
-							color: '#333',
-							fontWeight: 700,
-							fontSize: '2.5rem',
-							marginBottom: '0.5rem',
-						}}>
-						TESTIMONIALS
+				<div className='text-center mb-16'>
+					<h2 className='text-5xl font-extrabold text-gray-800 mb-4'>
+						What Our Clients Say
 					</h2>
-					<p
-						style={{
-							color: '#555',
-							maxWidth: '600px',
-							margin: '0 auto',
-						}}>
-						Subscribe to our newsletter for more success stories and energy
-						insights
+					<p className='text-lg text-gray-600 max-w-2xl mx-auto'>
+						Our trusted clients share how our innovative energy solutions have
+						transformed their day-to-day operations and empowered their
+						businesses.
 					</p>
 				</div>
 
 				{/* Testimonials Grid */}
-				<Row className='g-4'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12'>
 					{testimonials.map((t) => (
-						<Col
+						<div
 							key={t.id}
-							xs={12}
-							md={6}>
-							<div className='h-100 p-4 text-center testimonial-card'>
+							className='bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105'>
+							<div className='p-8 flex flex-col items-center'>
 								{/* Avatar */}
-								<div className='avatar-wrapper mb-3 mx-auto'>
-									<img
-										src={t.image}
-										alt={t.name}
-										style={{
-											width: '100px',
-											height: '100px',
-											objectFit: 'cover',
-											borderRadius: '50%',
-											border: '4px solid #fff',
-											boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-										}}
-									/>
-								</div>
+								<img
+									src={t.image}
+									alt={t.name}
+									className='w-28 h-28 rounded-full border-4 border-gray-100 shadow-md mb-6'
+								/>
 
 								{/* Star Rating */}
-								<div className='d-flex justify-content-center gap-2 mb-3'>
+								<div className='flex mb-4'>
 									{[...Array(5)].map((_, i) => (
 										<FiStar
 											key={i}
-											style={{
-												color: i < t.rating ? '#ffc107' : '#ddd',
-												marginRight: '2px',
-											}}
+											className={`mx-1 ${
+												i < t.rating ? 'text-yellow-400' : 'text-gray-300'
+											}`}
 										/>
 									))}
 								</div>
 
 								{/* Testimonial Text */}
-								<p
-									style={{
-										color: '#555',
-										fontStyle: 'italic',
-										lineHeight: '1.6',
-									}}>
+								<p className='text-gray-700 italic text-center mb-6'>
 									"{t.text}"
 								</p>
 
 								{/* Client Info */}
-								<h5
-									style={{ color: '#333', fontWeight: 600, marginTop: '1rem' }}>
-									{t.name}
-								</h5>
-								<p
-									style={{
-										color: '#999',
-										fontSize: '0.9rem',
-										marginTop: '0.25rem',
-									}}>
-									{t.role}
-								</p>
+								<div className='text-center'>
+									<h5 className='text-xl font-semibold text-gray-800'>
+										{t.name}
+									</h5>
+									<p className='text-sm text-gray-500'>{t.role}</p>
+								</div>
 							</div>
-						</Col>
+						</div>
 					))}
-				</Row>
-			</Container>
-
-			{/* Custom Styles */}
-			<style jsx>{`
-				.testimonial-card {
-					background: #fff;
-					border-radius: 8px;
-					box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-					transition: transform 0.3s ease, box-shadow 0.3s ease;
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-				}
-
-				.testimonial-card:hover {
-					transform: translateY(-5px);
-					box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-				}
-
-				.avatar-wrapper {
-					width: 100px;
-					height: 100px;
-				}
-
-				@media (max-width: 768px) {
-					h2 {
-						font-size: 2rem !important;
-					}
-					.testimonial-card {
-						padding: 2rem 1.5rem !important;
-					}
-				}
-			`}</style>
+				</div>
+			</div>
 		</section>
 	);
 };

@@ -1,8 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import logo_img from '../assets/Images/Faraday Logo - Olusesan Oloruntola 1.svg';
@@ -18,8 +14,8 @@ const OffcanvasNavbar = ({
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const offCanvasRef = useRef(null);
-
 	const navigate = useNavigate();
+
 	// Update navbar style based on scroll
 	useEffect(() => {
 		const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -39,9 +35,7 @@ const OffcanvasNavbar = ({
 			}
 		};
 		document.addEventListener('mousedown', handleClickOutside);
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
+		return () => document.removeEventListener('mousedown', handleClickOutside);
 	}, [isOpen]);
 
 	const toggleNav = () => {
@@ -58,62 +52,64 @@ const OffcanvasNavbar = ({
 
 	return (
 		<>
-			<Navbar
-				collapseOnSelect
-				expand='lg'
-				className={`py-3 fixed-top ${
+			{/* Desktop Navbar */}
+			<header
+				className={`fixed top-0 w-full z-50 transition-all duration-300 py-3 ${
 					isScrolled ? styleProps.scrolledBg : styleProps.defaultBg
-				}`}
-				expanded={isOpen}
-				onToggle={toggleNav}>
-				<Container>
-					<Navbar.Brand
-						as={Link}
+				}`}>
+				<div className='max-w-6xl mx-auto px-4 flex items-center justify-between'>
+					<Link
 						to='/'
-						className='d-flex align-items-center gap-2'>
+						className='flex items-center gap-2'>
 						<img
 							src={logo_img}
 							alt='logo'
-							style={{ height: '30px' }}
-							className='duration-300 hover:rotate-[-5deg] transition-all'
+							className='h-8 transition-transform duration-300 hover:rotate-[-5deg]'
 						/>
-						<p className='custom-nav-link mb-0'>Faraday's Projects</p>
-					</Navbar.Brand>
+						<p
+							className='text-base font-medium'
+							style={{
+								color: isScrolled
+									? styleProps.scrolledNavLinkColor
+									: styleProps.defaultNavLinkColor,
+							}}>
+							Faraday&apos;s Projects
+						</p>
+					</Link>
 
-					<Navbar.Toggle
-						aria-controls='responsive-navbar-nav'
-						onClick={toggleNav}
-						className='border-0'>
-						{isOpen ? (
-							<FaTimes
-								size={24}
-								color={
-									isScrolled
+					{/* Desktop Nav Links */}
+					<div className='hidden lg:flex items-center space-x-6'>
+						{navLinks.map((link) => (
+							<Link
+								key={link.path}
+								to={link.path}
+								onClick={() => setIsOpen(false)}
+								className='relative text-base font-medium transition-colors duration-300'
+								style={{
+									color: isScrolled
 										? styleProps.scrolledNavLinkColor
-										: styleProps.defaultNavLinkColor
-								}
-							/>
-						) : (
-							<FaBars
-								size={24}
-								color={
-									isScrolled
-										? styleProps.scrolledNavLinkColor
-										: styleProps.defaultNavLinkColor
-								}
-							/>
-						)}
-					</Navbar.Toggle>
+										: styleProps.defaultNavLinkColor,
+								}}>
+								{link.name}
+								<span className='absolute left-0 -bottom-1 h-0.5 w-full bg-red-600 scale-x-0 hover:scale-x-100 transition-transform origin-left'></span>
+							</Link>
+						))}
+						<button
+							onClick={() => {
+								navigate('/contact');
+								setIsOpen(false);
+							}}
+							className='px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors'>
+							Contact Us
+						</button>
+					</div>
 
-					<Navbar.Collapse
-						id='responsive-navbar-nav'
-						ref={offCanvasRef}
-						className={`${isOpen ? 'menu-open' : ''}`}>
-						{/* Close icon within the offcanvas menu */}
-						{isOpen && (
-							<div
-								className='offcanvas-close-icon'
-								onClick={toggleNav}>
+					{/* Mobile Menu Toggle */}
+					<div className='lg:hidden'>
+						<button
+							onClick={toggleNav}
+							className='p-2 focus:outline-none'>
+							{isOpen ? (
 								<FaTimes
 									size={24}
 									color={
@@ -122,91 +118,62 @@ const OffcanvasNavbar = ({
 											: styleProps.defaultNavLinkColor
 									}
 								/>
-							</div>
-						)}
-						<Nav className='text-black gap-2 me-auto ms-auto'>
-							{navLinks.map((link) => (
-								<Nav.Link
-									key={link.path}
-									as={Link}
-									to={link.path}
-									className='position-relative custom-nav-link fw-medium'
-									onClick={() => setIsOpen(false)}>
-									{link.name}
-									<span className='nav-underline'></span>
-								</Nav.Link>
-							))}
-						</Nav>
-						<Nav>
-							<Nav.Link
-								as={Link}
-								to='/contact'>
-								<Button
-									className='btn-hover-effect'
-									style={{
-										backgroundColor: '#D32F2F',
-										borderColor: '#D32F2F',
-									}}
-									onClick={() => navigate('/contact')}>
-									Contact Us
-								</Button>
-							</Nav.Link>
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
+							) : (
+								<FaBars
+									size={24}
+									color={
+										isScrolled
+											? styleProps.scrolledNavLinkColor
+											: styleProps.defaultNavLinkColor
+									}
+								/>
+							)}
+						</button>
+					</div>
+				</div>
+			</header>
 
-				<style
-					jsx
-					global>{`
-					.navbar {
-						transition: all 0.3s ease-in-out;
-						backdrop-filter: ${isScrolled ? 'blur(10px)' : 'none'};
-					}
-					.custom-nav-link {
-						font-size: 1.1rem;
-						color: ${isScrolled
-							? styleProps.scrolledNavLinkColor
-							: styleProps.defaultNavLinkColor} !important;
-						transition: all 0.3s ease;
-						padding: 0.5rem 1rem !important;
-						position: relative;
-					}
-					.custom-nav-link:hover,
-					.custom-nav-link:active,
-					.custom-nav-link.active {
-						color: #d32f2f !important;
-					}
-					.offcanvas-close-icon {
-						position: absolute;
-						top: 1rem;
-						right: 1rem;
-						cursor: pointer;
-						z-index: 1100;
-					}
-					@media (max-width: 991px) {
-						.navbar-collapse {
-							position: fixed;
-							top: 0;
-							right: -100%;
-							width: 300px;
-							height: 100vh;
-							background: rgba(229, 229, 229, 0.98);
-							backdrop-filter: blur(10px);
-							transition: right 0.3s ease-in-out;
-							padding: 2rem;
-							z-index: 1050;
-						}
-						.menu-open {
-							right: 0 !important;
-							box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-						}
-						.nav-link {
-							color: #000 !important;
-							padding: 1rem 0 !important;
-						}
-					}
-				`}</style>
-			</Navbar>
+			{/* Off-canvas Mobile Menu */}
+			<nav
+				ref={offCanvasRef}
+				className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-40 transform transition-transform duration-300 ${
+					isOpen ? 'translate-x-0' : 'translate-x-full'
+				} lg:hidden`}>
+				<div className='p-4'>
+					<div className='flex justify-end'>
+						<button
+							onClick={toggleNav}
+							className='p-2 focus:outline-none'>
+							<FaTimes
+								size={24}
+								color='#000'
+							/>
+						</button>
+					</div>
+					<ul className='mt-8 space-y-6'>
+						{navLinks.map((link) => (
+							<li key={link.path}>
+								<Link
+									to={link.path}
+									onClick={() => setIsOpen(false)}
+									className='block text-xl font-medium text-black transition-colors hover:text-red-600'>
+									{link.name}
+								</Link>
+							</li>
+						))}
+						<li>
+							<button
+								onClick={() => {
+									navigate('/contact');
+									setIsOpen(false);
+								}}
+								className='mt-4 w-full px-4 py-2 bg-red-600 text-white rounded-md text-center hover:bg-red-700 transition-colors'>
+								Contact Us
+							</button>
+						</li>
+					</ul>
+				</div>
+			</nav>
 		</>
 	);
 };
