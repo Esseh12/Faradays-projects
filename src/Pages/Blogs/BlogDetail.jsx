@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
+import {
+	FaCalendar,
+	FaUser,
+	FaShareAlt,
+	FaTwitter,
+	FaFacebook,
+	FaLinkedin,
+} from 'react-icons/fa';
 import dummyBlogs from '../../Components/Blogs/DummyBlog';
+import OffcanvasNavbar from '../../Components/Navbar';
+import Footer from '../../Components/Footer';
 
 const BlogDetail = () => {
 	const { id } = useParams();
@@ -9,6 +19,7 @@ const BlogDetail = () => {
 	const [relatedPosts, setRelatedPosts] = useState([]);
 
 	useEffect(() => {
+		// Simulate an API call delay
 		setTimeout(() => {
 			const post = dummyBlogs.find((b) => b.id === parseInt(id));
 			setBlog(post);
@@ -18,128 +29,248 @@ const BlogDetail = () => {
 		}, 500);
 	}, [id]);
 
-	if (!blog) return <div>Loading...</div>;
+	if (!blog) return <div className='loading'>Loading...</div>;
 
 	return (
-		<div className='blog-detail'>
-			<section className='post-hero'>
-				<img
-					src={blog.image}
-					alt={blog.title}
-				/>
-			</section>
-
-			<Container>
-				<article className='post-content'>
-					<div className='text-center meta'>
-						<span className='category'>{blog.category}</span>
-						<h1>{blog.title}</h1>
-						<div className='author-date'>
-							<span>By {blog.author}</span>
-							<span>{blog.date}</span>
-						</div>
-					</div>
-
-					<div
-						className='content'
-						dangerouslySetInnerHTML={{ __html: blog.content }}
+		<>
+			<OffcanvasNavbar />
+			<div className='blog-detail'>
+				<div className='blog-hero'>
+					<img
+						src={blog.image.url}
+						alt={blog.title}
+						className='hero-image'
 					/>
+				</div>
 
-					<div className='text-center social-sharing'>
-						<h4>Share this post:</h4>
-						<div className='buttons'>
-							<button>Twitter</button>
-							<button>Facebook</button>
-							<button>LinkedIn</button>
+				<Container>
+					<article className='blog-content'>
+						<div className='blog-header'>
+							<span className='category-tag'>{blog.category}</span>
+							<h1 className='blog-title'>{blog.title}</h1>
+
+							<div className='blog-meta'>
+								<div className='meta-item'>
+									<FaUser />
+									<span>{blog.author}</span>
+								</div>
+								<div className='meta-item'>
+									<FaCalendar />
+									<span>{blog.date}</span>
+								</div>
+							</div>
 						</div>
-					</div>
-				</article>
 
-				{relatedPosts.length > 0 && (
-					<section className='border-top mt-5 pt-3 related-posts'>
-						<h2>Related Articles</h2>
-						<Row>
-							{relatedPosts.map((post) => (
-								<Col
-									md={4}
-									key={post.id}>
-									<Link
-										to={`/blog/${post.id}`}
-										className='related-post'>
-										<img
-											src={post.image}
-											alt={post.title}
-										/>
-										<h3>{post.title}</h3>
-									</Link>
-								</Col>
-							))}
-						</Row>
-					</section>
-				)}
-			</Container>
+						<div
+							className='blog-body'
+							dangerouslySetInnerHTML={{ __html: blog.content }}
+						/>
+
+						<div className='social-share'>
+							<h4>Share this article</h4>
+							<div className='share-buttons'>
+								<button className='share-btn twitter'>
+									<FaTwitter />
+									<span>Twitter</span>
+								</button>
+								<button className='share-btn facebook'>
+									<FaFacebook />
+									<span>Facebook</span>
+								</button>
+								<button className='share-btn linkedin'>
+									<FaLinkedin />
+									<span>LinkedIn</span>
+								</button>
+							</div>
+						</div>
+					</article>
+
+					{relatedPosts.length > 0 && (
+						<section className='related-posts'>
+							<h2>More from our blog</h2>
+							<Row>
+								{relatedPosts.map((post) => (
+									<Col
+										md={4}
+										key={post.id}>
+										<Link
+											to={`/blog/${post.id}`}
+											className='related-post-card'>
+											<div className='related-post-image'>
+												<img
+													src={post.image.url}
+													alt={post.title}
+												/>
+											</div>
+											<div className='related-post-content'>
+												<h3>{post.title}</h3>
+											</div>
+										</Link>
+									</Col>
+								))}
+							</Row>
+						</section>
+					)}
+				</Container>
+			</div>
+			<Footer />
 
 			<style jsx>{`
-				.blog-detail {
-					padding: 4rem 0;
+				:root {
+					--color-background: #f4f7f6;
+					--color-text-primary: #1a2b3c;
+					--color-text-secondary: #4a5568;
+					--color-accent: #3182ce;
+					--color-accent-light: #e6f2ff;
 				}
-				.post-hero img {
-					width: 100%;
-					height: 400px;
-					object-fit: cover;
+
+				.blog-detail {
+					background-color: var(--color-background);
+					color: var(--color-text-primary);
+					font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+						Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+						sans-serif;
+				}
+
+				.blog-hero {
 					margin-bottom: 2rem;
 				}
-				.post-content {
-					max-width: 800px;
-					margin: 0 auto;
+
+				.hero-image {
+					width: 100%;
+					height: 500px;
+					object-fit: cover;
+					border-radius: 12px;
+					box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 				}
-				.meta .category {
-					background: var(--primary-color);
-					color: white;
+
+				.blog-content {
+					background-color: white;
+					padding: 3rem;
+					border-radius: 12px;
+					box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+					margin-top: -100px;
+					position: relative;
+					z-index: 10;
+				}
+
+				.blog-header {
+					text-align: center;
+					margin-bottom: 2rem;
+				}
+
+				.category-tag {
+					background-color: var(--color-accent-light);
+					color: var(--color-accent);
 					padding: 0.5rem 1rem;
-					border-radius: 30px;
-					font-size: 0.9rem;
+					border-radius: 20px;
+					font-size: 0.8rem;
+					font-weight: 600;
+					display: inline-block;
 					margin-bottom: 1rem;
 				}
-				h1 {
+
+				.blog-title {
 					font-size: 2.5rem;
-					margin: 1.5rem 0;
-					color: var(--secondary-color);
+					font-weight: 700;
+					color: var(--color-text-primary);
+					margin-bottom: 1rem;
 				}
-				.author-date {
+
+				.blog-meta {
+					display: flex;
+					justify-content: center;
+					gap: 1.5rem;
+					color: var(--color-text-secondary);
+				}
+
+				.meta-item {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+				}
+
+				.blog-body {
+					line-height: 1.8;
+					font-size: 1.1rem;
+					color: var(--color-text-secondary);
+					margin-top: 2rem;
+				}
+
+				.social-share {
+					text-align: center;
+					margin-top: 3rem;
+					padding-top: 2rem;
+					border-top: 1px solid rgba(0, 0, 0, 0.1);
+				}
+
+				.share-buttons {
 					display: flex;
 					justify-content: center;
 					gap: 1rem;
-					color: var(--text-light);
-					font-size: 0.9rem;
 				}
-				.content {
-					line-height: 1.7;
-					font-size: 1.1rem;
-					color: var(--text-color);
+
+				.share-btn {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+					padding: 0.75rem 1.5rem;
+					border: none;
+					border-radius: 8px;
+					font-weight: 600;
+					cursor: pointer;
+					transition: all 0.3s ease;
 				}
-				.social-sharing h4 {
-					margin-bottom: 1rem;
+
+				.share-btn.twitter {
+					background-color: #1da1f2;
+					color: white;
 				}
+				.share-btn.facebook {
+					background-color: #3b5998;
+					color: white;
+				}
+				.share-btn.linkedin {
+					background-color: #0077b5;
+					color: white;
+				}
+
+				.related-posts {
+					margin-top: 3rem;
+				}
+
 				.related-posts h2 {
-					margin-bottom: 1rem;
-					color: var(--secondary-color);
+					text-align: center;
+					margin-bottom: 2rem;
+					font-size: 2rem;
 				}
-				.related-post img {
-					height: 200px;
+
+				.related-post-card {
+					display: block;
+					text-decoration: none;
+					color: var(--color-text-primary);
+					margin-bottom: 1.5rem;
+					transition: transform 0.3s ease;
+				}
+
+				.related-post-card:hover {
+					transform: translateY(-5px);
+				}
+
+				.related-post-image img {
 					width: 100%;
+					height: 250px;
 					object-fit: cover;
-					border-radius: 0.5rem;
-					margin-bottom: 0.5rem;
+					border-radius: 12px;
 				}
-				:global(:root) {
-					--primary-color: #0062cc;
-					--secondary-color: #004976;
-					--text-color: #333;
-					--text-light: #6c757d;
+
+				.related-post-content h3 {
+					margin-top: 1rem;
+					font-size: 1.2rem;
+					font-weight: 600;
 				}
 			`}</style>
-		</div>
+		</>
 	);
 };
 

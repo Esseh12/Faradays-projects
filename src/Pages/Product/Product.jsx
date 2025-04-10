@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OffcanvasNavbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import products from '../../Components/Product/productsData';
+import * as XLSX from 'xlsx';
 
 const ProductPage = () => {
 	const [activeCategory, setActiveCategory] = useState('all');
 	const [filteredProducts, setFilteredProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const navigate = useNavigate();
 
 	// Product categories
 	const categories = [
@@ -49,6 +51,41 @@ const ProductPage = () => {
 				staggerChildren: 0.1,
 			},
 		},
+	};
+
+	// CTA actions
+	const handleRequestConsultation = () => {
+		navigate('/contact');
+	};
+
+	const handleDownloadCatalog = () => {
+		// Map products to only the required fields
+		const exportData = products.map((product) => ({
+			Name: product.name,
+			Category: product.category,
+			Price: product.price,
+			Specs: JSON.stringify(product.specs),
+		}));
+
+		// Convert exportData to a worksheet
+		const worksheet = XLSX.utils.json_to_sheet(exportData);
+		// Create a new workbook and append the worksheet
+		const workbook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(workbook, worksheet, 'Products');
+		// Generate Excel file buffer
+		const excelBuffer = XLSX.write(workbook, {
+			bookType: 'xlsx',
+			type: 'array',
+		});
+		// Create a Blob and trigger download
+		const data = new Blob([excelBuffer], { type: 'application/octet-stream' });
+		const url = window.URL.createObjectURL(data);
+		const link = document.createElement('a');
+		link.href = url;
+		link.setAttribute('download', 'product_catalog.xlsx');
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 	};
 
 	return (
@@ -235,8 +272,16 @@ const ProductPage = () => {
 									your specific needs.
 								</p>
 								<div className='cta-buttons'>
-									<button className='primary-btn'>Request Consultation</button>
-									<button className='secondary-btn'>Download Catalog</button>
+									<button
+										className='primary-btn'
+										onClick={handleRequestConsultation}>
+										Request Consultation
+									</button>
+									<button
+										className='secondary-btn'
+										onClick={handleDownloadCatalog}>
+										Download Catalog
+									</button>
 								</div>
 							</Col>
 						</Row>
@@ -292,7 +337,7 @@ const ProductPage = () => {
 						left: 0;
 						width: 100%;
 						height: 100%;
-						background: rgba(0, 0, 0, 0.5);
+						background: rgba(0, 0, 0, 0.8);
 						z-index: -1;
 					}
 					.hero-text {
@@ -344,7 +389,6 @@ const ProductPage = () => {
 						box-shadow: var(--card-shadow);
 						margin-bottom: 2rem;
 						transition: var(--transition);
-						/* Removed fixed height for auto height */
 					}
 					.featured-product-card:hover {
 						transform: translateY(-8px);
@@ -408,7 +452,6 @@ const ProductPage = () => {
 						overflow: hidden;
 						box-shadow: var(--card-shadow);
 						transition: var(--transition);
-						/* Removed fixed height; auto height now */
 						padding-bottom: 1rem;
 					}
 					.product-card:hover {
@@ -621,7 +664,6 @@ const ProductPage = () => {
 							grid-template-columns: 1fr;
 						}
 						.product-card {
-							/* Auto height, ensuring content is not clipped */
 							height: auto;
 						}
 						.product-image {

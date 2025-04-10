@@ -1,33 +1,48 @@
 // dummyBlogs.js
-// This file exports an array of 50 blog posts for Faraday’s project,
-// with 20 Solar posts, 20 Inverter posts, and 10 Battery posts.
+// This file exports an array of 15 blog posts for Faraday’s project.
+// There are 6 Solar posts, 6 Inverter posts, and 3 Battery posts.
+// Each blog post has a unique title, excerpt, image (sourced from Pexels), and HTML content.
 
-const totalPosts = 50;
-const solarPostsCount = 20;
-const inverterPostsCount = 20;
-const batteryPostsCount = 10;
+const totalPosts = 15;
+const solarPostsCount = 6;
+const inverterPostsCount = 6;
+const batteryPostsCount = 3;
 
 const dummyBlogs = [];
 
-// Create 20 Solar posts (IDs 1-20)
+// Curated image IDs from Pexels for each category
+const solarImageIds = [
+	2113560, 2179035, 1499692, 1650031, 327533, 2091168, 2063597,
+];
+const inverterImageIds = [2591804, 2099691, 3064072, 2796678, 3015519];
+const batteryImageIds = [3261031, 3536683, 2968792];
+
+// Helper to generate Pexels image URL using a guided format
+const generateImageUrl = (imageId) =>
+	`https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`;
+
+// Create 6 Solar blog posts (IDs 1-6)
 for (let i = 0; i < solarPostsCount; i++) {
 	const id = i + 1;
-	const title = `Solar Energy Breakthrough #${i + 1}`;
+	const title = `Solar Energy Spotlight #${i + 1}: Harnessing the Sun`;
 	const category = 'Solar';
 	const date = new Date(2024, i % 12, (i % 28) + 1).toISOString().split('T')[0];
-	const author = 'Faraday Team';
-	const excerpt =
-		'Explore innovative solar panel technology designed to maximize energy output and lower electricity bills.';
-	// Use image IDs from 101 upward for Solar posts
-	const image = `https://images.pexels.com/photos/${101 + i}/pexels-photo-${
-		101 + i
-	}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
-	const content = `<h2>Solar Innovation in Focus</h2>
-<p>Post #${
+	const author = 'Faraday Blog Team';
+	const excerpt = `Solar Blog #${
 		i + 1
-	} dives into the latest advancements in solar energy systems. Learn how enhanced photovoltaic cells, smarter tracking systems, and robust installation methods are setting new standards for efficiency and sustainability.</p>
-<h3>Why It Matters</h3>
-<p>Our solar technology breakthroughs help homeowners and businesses reduce energy costs while promoting a greener future.</p>`;
+	}: In this post, we discuss breakthrough solar panel technologies that enhance efficiency and reduce costs.`;
+	// Cycle through the curated solar image IDs
+	const imageId = solarImageIds[i % solarImageIds.length];
+	const image = {
+		url: generateImageUrl(imageId),
+		alt: `Solar panels illuminated by sunlight - Image ${i + 1}`,
+	};
+	const content = `
+    <h2>Solar Innovation ${i + 1}</h2>
+    <p>This blog post explores innovative photovoltaic designs and energy capture techniques. Post #${
+			i + 1
+		} dives into real-world applications of solar technology and its sustainable impact on the environment.</p>
+  `;
 
 	dummyBlogs.push({
 		id,
@@ -42,27 +57,30 @@ for (let i = 0; i < solarPostsCount; i++) {
 	});
 }
 
-// Create 20 Inverter posts (IDs 21-40)
+// Create 6 Inverter blog posts (IDs 7-12)
 for (let i = 0; i < inverterPostsCount; i++) {
-	const id = solarPostsCount + i + 1; // IDs 21 to 40
-	const title = `Inverter Insights #${i + 1}`;
+	const id = solarPostsCount + i + 1; // IDs 7 to 12
+	const title = `Inverter Insights #${i + 1}: Optimizing Power Conversion`;
 	const category = 'Inverter';
 	const date = new Date(2024, i % 12, ((i + 1) % 28) + 1)
 		.toISOString()
 		.split('T')[0];
-	const author = 'Faraday Team';
-	const excerpt =
-		'Gain expert knowledge on inverter selection, maintenance, and optimization to ensure peak performance for your solar system.';
-	// Use image IDs from 121 upward for Inverter posts
-	const image = `https://images.pexels.com/photos/${121 + i}/pexels-photo-${
-		121 + i
-	}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
-	const content = `<h2>Understanding Inverter Technology</h2>
-<p>Post #${
+	const author = 'Faraday Blog Team';
+	const excerpt = `Inverter Blog #${
 		i + 1
-	} offers an in-depth look into the mechanics of inverters. Discover the differences between string inverters, microinverters, and hybrid systems, and learn how each type contributes to system efficiency.</p>
-<h3>Key Benefits</h3>
-<p>Reliable DC-to-AC conversion, improved energy yield, and longer system lifespan are at the core of our inverter solutions.</p>`;
+	}: Learn about advanced inverter systems that efficiently convert DC to AC power and improve overall system performance.`;
+	// Cycle through the curated inverter image IDs
+	const imageId = inverterImageIds[i % inverterImageIds.length];
+	const image = {
+		url: generateImageUrl(imageId),
+		alt: `Inverter technology highlighted - Image ${i + 1}`,
+	};
+	const content = `
+    <h2>Inverter Technology ${i + 1}</h2>
+    <p>This article focuses on how smart inverter designs and digital features are setting new benchmarks in power conversion. Post #${
+			i + 1
+		} provides insights into system tuning and performance improvements.</p>
+  `;
 
 	dummyBlogs.push({
 		id,
@@ -77,27 +95,30 @@ for (let i = 0; i < inverterPostsCount; i++) {
 	});
 }
 
-// Create 10 Battery posts (IDs 41-50)
+// Create 3 Battery blog posts (IDs 13-15)
 for (let i = 0; i < batteryPostsCount; i++) {
-	const id = solarPostsCount + inverterPostsCount + i + 1; // IDs 41 to 50
-	const title = `Battery Storage Solutions #${i + 1}`;
+	const id = solarPostsCount + inverterPostsCount + i + 1; // IDs 13 to 15
+	const title = `Battery Breakthrough #${i + 1}: Advancing Energy Storage`;
 	const category = 'Battery';
 	const date = new Date(2024, i % 12, ((i + 2) % 28) + 1)
 		.toISOString()
 		.split('T')[0];
-	const author = 'Faraday Team';
-	const excerpt =
-		'Discover state-of-the-art battery storage systems that optimize energy retention and deliver reliable performance for your renewable setup.';
-	// Use image IDs from 141 upward for Battery posts
-	const image = `https://images.pexels.com/photos/${141 + i}/pexels-photo-${
-		141 + i
-	}.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1260`;
-	const content = `<h2>Revolutionizing Battery Storage</h2>
-<p>Post #${
+	const author = 'Faraday Blog Team';
+	const excerpt = `Battery Blog #${
 		i + 1
-	} explains the evolution of battery technology in renewable energy. Learn about innovations in energy density, longevity, and safety that are driving the next generation of battery storage solutions.</p>
-<h3>Advantages</h3>
-<p>Enhanced storage capacity, rapid charge/discharge cycles, and robust system integration make these battery solutions ideal for modern energy demands.</p>`;
+	}: Explore innovative battery storage solutions that offer improved energy density and longer life spans.`;
+	// Cycle through the curated battery image IDs
+	const imageId = batteryImageIds[i % batteryImageIds.length];
+	const image = {
+		url: generateImageUrl(imageId),
+		alt: `Advanced battery storage in focus - Image ${i + 1}`,
+	};
+	const content = `
+    <h2>Battery Innovation ${i + 1}</h2>
+    <p>This post examines cutting-edge battery technology and its role in supporting renewable energy systems. Post #${
+			i + 1
+		} highlights unique design aspects and performance enhancements that drive reliability and scalability.</p>
+  `;
 
 	dummyBlogs.push({
 		id,

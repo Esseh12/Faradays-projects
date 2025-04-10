@@ -10,7 +10,8 @@ import BlogPage from './Pages/Blogs/Blogs';
 import BlogDetail from './Pages/Blogs/BlogDetail';
 import ProjectPage from './Pages/Projects/ProjectsPage';
 import ProjectDetail from './Pages/Projects/ProjectDetail';
-// import Contact from './Pages/Contact'; // Create this component if needed
+import PageNotFound from './Pages/PageNotFound';
+import Contact from './Pages/Contact';
 
 function App() {
 	return (
@@ -47,11 +48,14 @@ function App() {
 				path='/projects/:id'
 				element={<ProjectDetail />}
 			/>
-			{/* <Route
+			<Route
 				path='/contact'
 				element={<Contact />}
-			/>{' '} */}
-			{/* Add contact route */}
+			/>{' '}
+			<Route
+				path='*'
+				element={<PageNotFound />}
+			/>
 		</Routes>
 	);
 }

@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo_img from '../assets/Images/Faraday Logo - Olusesan Oloruntola 1.svg';
 
 const OffcanvasNavbar = ({
@@ -19,6 +19,7 @@ const OffcanvasNavbar = ({
 	const [isOpen, setIsOpen] = useState(false);
 	const offCanvasRef = useRef(null);
 
+	const navigate = useNavigate();
 	// Update navbar style based on scroll
 	useEffect(() => {
 		const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -145,7 +146,8 @@ const OffcanvasNavbar = ({
 									style={{
 										backgroundColor: '#D32F2F',
 										borderColor: '#D32F2F',
-									}}>
+									}}
+									onClick={() => navigate('/contact')}>
 									Contact Us
 								</Button>
 							</Nav.Link>
