@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import { FaPaperPlane, FaCheck } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
 import swal from 'sweetalert';
-// import OffcanvasNavbar from '../Components/Navbar'; // commented out
+import OffcanvasNavbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 
 const SERVICE_ID = 'service_8uzuran';
@@ -85,7 +85,7 @@ const Contact = () => {
 					padding: 0;
 				}
 			`}</style>
-
+			<OffcanvasNavbar />
 			{/* Hero Section */}
 			<div className={`vc-hero ${heroLoaded ? 'image-loaded' : ''}`}>
 				<div className='vc-hero-overlay'></div>
