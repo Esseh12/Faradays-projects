@@ -89,6 +89,18 @@ const ProductPage = () => {
 
 	return (
 		<>
+			{/* Global style to prevent horizontal overflow */}
+			<style
+				jsx
+				global>{`
+				html,
+				body {
+					overflow-x: hidden;
+					margin: 0;
+					padding: 0;
+				}
+			`}</style>
+
 			<OffcanvasNavbar />
 			<div className='product-page'>
 				{/* HERO SECTION */}
@@ -370,7 +382,6 @@ const ProductPage = () => {
 						margin: 0 auto;
 						opacity: 0.9;
 					}
-
 					/* Featured Products Section */
 					.featured-products {
 						padding: 5rem 0;
@@ -408,7 +419,6 @@ const ProductPage = () => {
 						transform: translateY(-8px);
 						box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 					}
-
 					/* Product Catalog Section */
 					.product-catalog {
 						padding: 5rem 0;
@@ -554,7 +564,7 @@ const ProductPage = () => {
 						border: none;
 						padding: 0.75rem 1rem;
 						border-radius: 6px;
-						font-weight: 500;
+						font-weight: 600;
 						cursor: pointer;
 						transition: var(--transition);
 						margin-top: auto;
@@ -589,7 +599,6 @@ const ProductPage = () => {
 						color: var(--text-light);
 						width: 100%;
 					}
-
 					/* CTA Section */
 					.cta-section {
 						padding: 5rem 0;
@@ -639,7 +648,6 @@ const ProductPage = () => {
 						background-color: rgba(255, 255, 255, 0.1);
 						transform: translateY(-2px);
 					}
-
 					/* Responsive styles */
 					@media (max-width: 992px) {
 						.hero-text h1 {
