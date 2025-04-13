@@ -91,7 +91,9 @@ const Contact = () => {
 				<div className='vc-hero-overlay'></div>
 				<div className='vc-hero-text'>
 					<h1 className='text-[14px] md:text-base'>Virtual Consultation</h1>
-					<p>Our Advisors are ready to help you with your energy products.</p>
+					<p className='text-[12px] md:text-base'>
+						Our Advisors are ready to help you with your energy products.
+					</p>
 				</div>
 			</div>
 
