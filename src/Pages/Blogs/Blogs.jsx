@@ -18,23 +18,20 @@ const BlogPage = () => {
 	];
 
 	useEffect(() => {
-		// Preload hero background image and update state when loaded
-		const img = new Image();
-		img.src =
+		const heroImage = new Image();
+		heroImage.src =
 			'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/price-solar-desktop';
-		img.onload = () => setImageLoaded(true);
+		heroImage.onload = () => setImageLoaded(true);
 
-		// Simulate API call for blogs
 		const fetchBlogs = async () => {
 			setIsLoading(true);
 			try {
 				await new Promise((resolve) => setTimeout(resolve, 500));
 				setBlogs(dummyBlogs);
-				setIsLoading(false);
-			} catch (error) {
-				console.error('Failed to fetch blogs');
-				setIsLoading(false);
+			} catch (err) {
+				console.error('Error fetching blogs:', err);
 			}
+			setIsLoading(false);
 		};
 
 		fetchBlogs();
@@ -49,9 +46,20 @@ const BlogPage = () => {
 
 	return (
 		<>
+			{/* Global style to prevent horizontal overflow */}
+			<style
+				jsx
+				global>{`
+				html,
+				body {
+					overflow-x: hidden;
+					margin: 0;
+					padding: 0;
+				}
+			`}</style>
 			<OffcanvasNavbar />
 
-			{/* Hero Section spanning full width with dark overlay */}
+			{/* Hero Section */}
 			<div className={`hero-section ${imageLoaded ? 'image-loaded' : ''}`}>
 				<div className='hero-overlay'></div>
 				<div className='hero-text'>
@@ -60,73 +68,63 @@ const BlogPage = () => {
 				</div>
 			</div>
 
-			{/* Main content container */}
-			<div className='bg-white font-serif max-w-7xl mx-auto px-4 pb-5'>
-				{/* Navigation/Category Filter */}
-				<nav className='border-b py-4'>
-					<div className='flex justify-center space-x-6'>
-						{categories.map((category) => (
+			{/* Blog Content */}
+			<div className='max-w-7xl mx-auto px-4 bg-white font-serif pb-10'>
+				{/* Category Filter */}
+				<nav className='border-b py-5'>
+					<div className='flex justify-center gap-6'>
+						{categories.map(({ id, name }) => (
 							<button
-								key={category.id}
-								className={`
-                  uppercase text-sm font-semibold tracking-wider px-4 py-2
-                  ${
-										activeCategory === category.id
-											? 'text-black border-b-2 border-black'
-											: 'text-gray-500 hover:text-black'
-									}
-                `}
-								onClick={() => setActiveCategory(category.id)}>
-								{category.name}
+								key={id}
+								onClick={() => setActiveCategory(id)}
+								className={`uppercase text-sm font-semibold px-4 py-2 ${
+									activeCategory === id
+										? 'text-black border-b-2 border-black'
+										: 'text-gray-500 hover:text-black'
+								}`}>
+								{name}
 							</button>
 						))}
 					</div>
 				</nav>
 
-				{/* Featured Story */}
+				{/* Featured Blog */}
 				<section className='my-12'>
 					{isLoading ? (
-						<div className='grid md:grid-cols-2 gap-8'>
-							{/* Featured image skeleton */}
-							<div className='h-96 bg-gray-300 animate-pulse rounded'></div>
-							{/* Featured text skeleton */}
+						<div className='grid md:grid-cols-2 gap-8 animate-pulse'>
+							<div className='h-96 bg-gray-300 rounded'></div>
 							<div className='space-y-4'>
-								<div className='h-6 w-1/3 bg-gray-300 animate-pulse rounded'></div>
-								<div className='h-10 w-full bg-gray-300 animate-pulse rounded'></div>
-								<div className='h-4 w-1/2 bg-gray-300 animate-pulse rounded'></div>
-								<div className='h-4 w-full bg-gray-300 animate-pulse rounded'></div>
-								<div className='h-4 w-full bg-gray-300 animate-pulse rounded'></div>
-								<div className='h-8 w-32 bg-gray-300 animate-pulse rounded'></div>
+								<div className='h-6 w-1/3 bg-gray-300 rounded'></div>
+								<div className='h-10 bg-gray-300 rounded'></div>
+								<div className='h-4 w-1/2 bg-gray-300 rounded'></div>
+								<div className='h-4 bg-gray-300 rounded'></div>
+								<div className='h-8 w-32 bg-gray-300 rounded'></div>
 							</div>
 						</div>
 					) : (
 						featuredPost && (
 							<div className='grid md:grid-cols-2 gap-8'>
-								<div className='overflow-hidden'>
-									<img
-										src={featuredPost.image.url}
-										alt={featuredPost.title}
-										className='w-full h-96 object-cover transform hover:scale-105 transition-transform duration-300'
-									/>
-								</div>
-								<div className='d-flex flex-col justify-center'>
-									<span className='text-sm uppercase text-red-600 font-bold tracking-wider'>
+								<img
+									src={featuredPost.image.url}
+									alt={featuredPost.title}
+									className='h-96 w-full object-cover rounded transform hover:scale-105 transition duration-300'
+								/>
+								<div className='flex flex-col justify-center'>
+									<span className='text-sm uppercase text-red-600 font-bold'>
 										{featuredPost.category}
 									</span>
-									<h2 className='text-3xl font-bold mt-2 mb-4 leading-tight'>
+									<h2 className='text-3xl font-bold mt-2'>
 										{featuredPost.title}
 									</h2>
-									<div className='text-gray-600 mb-4 flex items-center space-x-4 gap-2'>
-										<span>{featuredPost.author}</span>
-										<span className='h-4 w-px bg-gray-300'></span>
-										<span>{featuredPost.date}</span>
-									</div>
-									<p className='text-lg text-gray-800 leading-relaxed'>
+									<p className='text-gray-600 text-sm my-2'>
+										{featuredPost.author} &middot; {featuredPost.date}
+									</p>
+									<p className='text-lg text-gray-800'>
 										{featuredPost.excerpt}
 									</p>
 									<Link
 										to={`/blog/${featuredPost.id}`}
-										className='mt-4 inline-block text-blue-600 hover:underline'>
+										className='text-blue-600 mt-4 hover:underline'>
 										View Blog →
 									</Link>
 								</div>
@@ -135,65 +133,47 @@ const BlogPage = () => {
 					)}
 				</section>
 
-				{/* Latest Stories Grid */}
+				{/* Latest Posts */}
 				<section>
-					<h3 className='text-2xl font-bold border-b-2 border-black pb-2 mb-8 mt-5'>
-						Latest Stories
-					</h3>
-					{isLoading ? (
-						<div className='grid md:grid-cols-3 gap-8'>
-							{Array.from({ length: 6 }).map((_, index) => (
-								<div
-									key={index}
-									className='group border-b pb-6 last:border-b-0'>
-									<div className='mb-4'>
-										<div className='w-full h-48 bg-gray-300 animate-pulse rounded'></div>
+					<h3 className='text-2xl font-bold mb-6'>Latest Stories</h3>
+					<div className='grid md:grid-cols-3 gap-8'>
+						{isLoading
+							? Array.from({ length: 6 }).map((_, i) => (
+									<div
+										key={i}
+										className='space-y-3 animate-pulse'>
+										<div className='h-48 bg-gray-300 rounded'></div>
+										<div className='h-4 w-1/3 bg-gray-300 rounded'></div>
+										<div className='h-6 w-3/4 bg-gray-300 rounded'></div>
+										<div className='h-4 w-full bg-gray-300 rounded'></div>
 									</div>
-									<div className='space-y-2'>
-										<div className='h-4 w-20 bg-gray-300 animate-pulse rounded'></div>
-										<div className='h-6 w-full bg-gray-300 animate-pulse rounded'></div>
-										<div className='h-4 w-32 bg-gray-300 animate-pulse rounded'></div>
-										<div className='h-4 w-full bg-gray-300 animate-pulse rounded'></div>
-									</div>
-								</div>
-							))}
-						</div>
-					) : (
-						<div className='grid md:grid-cols-3 gap-8'>
-							{otherPosts.map((blog) => (
-								<Link
-									to={`/blog/${blog.id}`}
-									key={blog.id}>
-									<article className='group border-b pb-6 last:border-b-0 hover:shadow-lg transition-shadow duration-300 p-4 m-2'>
-										<div className='overflow-hidden mb-4'>
+							  ))
+							: otherPosts.map((blog) => (
+									<Link
+										to={`/blog/${blog.id}`}
+										key={blog.id}>
+										<article className='group p-4 border-b hover:shadow-lg transition'>
 											<img
 												src={blog.image.url}
 												alt={blog.title}
-												className='w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300'
+												className='h-48 w-full object-cover rounded mb-4 group-hover:scale-105 transition-transform'
 											/>
-										</div>
-										<span className='text-xs uppercase text-gray-500 tracking-wider'>
-											{blog.category}
-										</span>
-										<h4 className='text-xl font-bold mt-2 mb-3 group-hover:text-blue-600 transition-colors'>
-											{blog.title}
-										</h4>
-										<div className='text-sm text-gray-600 mb-3 flex items-center space-x-3 gap-2'>
-											<span>{blog.author}</span>
-											<span className='h-3 w-px bg-gray-300'></span>
-											<span>{blog.date}</span>
-										</div>
-										<p className='text-gray-700 line-clamp-3'>{blog.excerpt}</p>
-										<div className='mt-4'>
-											<span className='text-blue-600 hover:underline font-semibold'>
-												View Blog →
+											<span className='text-xs uppercase text-gray-500'>
+												{blog.category}
 											</span>
-										</div>
-									</article>
-								</Link>
-							))}
-						</div>
-					)}
+											<h4 className='text-lg font-semibold mt-1 group-hover:text-blue-600'>
+												{blog.title}
+											</h4>
+											<p className='text-sm text-gray-600 my-1'>
+												{blog.author} &middot; {blog.date}
+											</p>
+											<p className='text-gray-700 line-clamp-3'>
+												{blog.excerpt}
+											</p>
+										</article>
+									</Link>
+							  ))}
+					</div>
 				</section>
 			</div>
 
@@ -203,36 +183,26 @@ const BlogPage = () => {
 				.hero-section {
 					position: relative;
 					min-height: 50vh;
-					width: 100%;
-					background-image: url('https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/price-solar-desktop');
-					background-size: cover;
-					background-position: center;
+					background: url('https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/price-solar-desktop')
+						center/cover no-repeat;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					padding: 4rem 0;
-					transition: opacity 0.5s ease;
-				}
-				.hero-section.image-loaded {
-					opacity: 1;
 				}
 				.hero-overlay {
 					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					background: rgba(0, 0, 0, 0.55);
+					inset: 0;
+					background-color: rgba(0, 0, 0, 0.5);
 					z-index: 1;
 				}
 				.hero-text {
 					position: relative;
 					z-index: 2;
-					text-align: center;
 					color: white;
-					animation: slideInUp 1s ease-out;
+					text-align: center;
+					animation: fadeInUp 1s ease-out;
 				}
-				@keyframes slideInUp {
+				@keyframes fadeInUp {
 					from {
 						transform: translateY(20px);
 						opacity: 0;
