@@ -11,6 +11,17 @@ import Footer from '../Components/Footer';
 const Homepage = () => {
 	return (
 		<>
+			{/* Global style to prevent horizontal overflow */}
+			<style
+				jsx
+				global>{`
+				html,
+				body {
+					overflow-x: hidden;
+					margin: 0;
+					padding: 0;
+				}
+			`}</style>
 			<OffcanvasNavbar />
 			<HeroSection />
 			{/* <HomeAbout /> */}
