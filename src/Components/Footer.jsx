@@ -320,10 +320,11 @@ const Footer = () => {
 				@media (max-width: 768px) {
 					.site-footer {
 						padding: 0rem 0;
+						padding-top: 3rem;
 					}
 
 					.footer-brand {
-						text-align: center;
+						text-align: left;
 						margin-bottom: 2rem;
 					}
 
