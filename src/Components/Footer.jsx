@@ -325,7 +325,7 @@ const Footer = () => {
 
 					.footer-brand {
 						text-align: left;
-						margin-bottom: 2rem;
+						margin-bottom: 1.5rem;
 					}
 
 					.footer-tagline {
