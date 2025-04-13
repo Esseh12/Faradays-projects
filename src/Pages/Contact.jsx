@@ -90,7 +90,7 @@ const Contact = () => {
 			<div className={`vc-hero ${heroLoaded ? 'image-loaded' : ''}`}>
 				<div className='vc-hero-overlay'></div>
 				<div className='vc-hero-text'>
-					<h1>Virtual Consultation</h1>
+					<h1 className='text-[14px] md:text-base'>Virtual Consultation</h1>
 					<p>Our Advisors are ready to help you with your energy products.</p>
 				</div>
 			</div>
