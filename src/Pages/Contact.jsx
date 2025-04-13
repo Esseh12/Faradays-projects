@@ -84,7 +84,7 @@ const Contact = () => {
 
 	return (
 		<>
-			<OffcanvasNavbar />
+			{/* <OffcanvasNavbar /> */}
 
 			{/* Hero Section */}
 			<div className={`vc-hero ${heroLoaded ? 'image-loaded' : ''}`}>
