@@ -319,7 +319,7 @@ const Footer = () => {
 
 				@media (max-width: 768px) {
 					.site-footer {
-						padding: 3rem 0;
+						padding: 0rem 0;
 					}
 
 					.footer-brand {
