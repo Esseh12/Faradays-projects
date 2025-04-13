@@ -3,10 +3,9 @@ import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import { FaPaperPlane, FaCheck } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
 import swal from 'sweetalert';
-import OffcanvasNavbar from '../Components/Navbar';
+// import OffcanvasNavbar from '../Components/Navbar'; // commented out
 import Footer from '../Components/Footer';
 
-// Replace with your own EmailJS details
 const SERVICE_ID = 'service_8uzuran';
 const TEMPLATE_ID = 'template_y5c9ske';
 const USER_ID = 'mQ786bE_HqQUYLj1u';
@@ -21,28 +20,22 @@ const Contact = () => {
 	const [status, setStatus] = useState({ message: '', type: '' });
 	const [isSending, setIsSending] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);
-
-	// Hero image loaded state (optional for fade-in effect)
 	const [heroLoaded, setHeroLoaded] = useState(false);
 
-	// Ref for the contact form
 	const form = useRef();
 
 	useEffect(() => {
-		// Preload the hero background image
 		const heroImg = new Image();
 		heroImg.src =
 			'https://digitalassets.tesla.com/image/upload/q_auto/f_auto/w_1920/prod/fulfillment/energy/Order/VirtualConsultations/VC_d_v2';
 		heroImg.onload = () => setHeroLoaded(true);
 	}, []);
 
-	// Handle input changes in the form
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	// Fade out the alert message after 2 seconds
 	const triggerAlertFadeOut = () => {
 		setShowAlert(true);
 		setTimeout(() => {
@@ -53,11 +46,9 @@ const Contact = () => {
 		}, 2000);
 	};
 
-	// Handle form submission via EmailJS
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setIsSending(true);
-
 		emailjs
 			.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, USER_ID)
 			.then(() => {
@@ -67,7 +58,6 @@ const Contact = () => {
 				});
 				swal('Success!', 'Your message has been sent successfully!', 'success');
 				triggerAlertFadeOut();
-				// Reset form fields
 				setFormData({ name: '', email: '', subject: '', message: '' });
 				setIsSending(false);
 			})
@@ -84,7 +74,17 @@ const Contact = () => {
 
 	return (
 		<>
-			{/* <OffcanvasNavbar /> */}
+			{/* Global style to prevent horizontal overflow */}
+			<style
+				jsx
+				global>{`
+				html,
+				body {
+					overflow-x: hidden;
+					margin: 0;
+					padding: 0;
+				}
+			`}</style>
 
 			{/* Hero Section */}
 			<div className={`vc-hero ${heroLoaded ? 'image-loaded' : ''}`}>
@@ -99,7 +99,6 @@ const Contact = () => {
 			<div className='vc-page-content'>
 				<Container>
 					<Row className='gy-5'>
-						{/* Left Column: Consultation Details */}
 						<Col md={6}>
 							<div className='details-card p-4'>
 								<h2 className='mb-3'>Schedule Your Consultation</h2>
@@ -129,7 +128,6 @@ const Contact = () => {
 							</div>
 						</Col>
 
-						{/* Right Column: Contact Form */}
 						<Col md={6}>
 							<div className='form-card p-4'>
 								<h3 className='mb-4'>Request a Consultation</h3>
@@ -211,9 +209,7 @@ const Contact = () => {
 												Sending...
 											</>
 										) : (
-											<div
-												div
-												className='d-flex align-items-center gap-2'>
+											<div className='d-flex align-items-center gap-2'>
 												<FaPaperPlane /> Submit
 											</div>
 										)}
@@ -227,6 +223,7 @@ const Contact = () => {
 
 			<Footer />
 
+			{/* Scoped component styles */}
 			<style jsx>{`
 				:root {
 					--vc-hero-height: 60vh;
@@ -235,8 +232,6 @@ const Contact = () => {
 					--vc-bg: #f4f7f6;
 					--vc-text-dark: #1a2b3c;
 				}
-
-				/* Hero Section */
 				.vc-hero {
 					position: relative;
 					width: 100%;
@@ -275,7 +270,6 @@ const Contact = () => {
 				.vc-hero.image-loaded {
 					opacity: 1;
 				}
-
 				@keyframes slideInUp {
 					0% {
 						transform: translateY(20px);
@@ -286,16 +280,13 @@ const Contact = () => {
 						opacity: 1;
 					}
 				}
-
-				/* Page Content */
 				.vc-page-content {
 					background-color: var(--vc-bg);
 					padding: 3rem 0;
 					min-height: 40vh;
 				}
-
-				/* Left Column: Details Card */
-				.details-card {
+				.details-card,
+				.form-card {
 					background-color: #fff;
 					border-radius: 8px;
 					box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
@@ -324,20 +315,11 @@ const Contact = () => {
 					margin-right: 0.5rem;
 					color: var(--vc-primary);
 				}
-
-				/* Right Column: Form Card */
-				.form-card {
-					background-color: #fff;
-					border-radius: 8px;
-					box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-				}
 				.form-card h3 {
 					font-size: 1.5rem;
 					margin-bottom: 1.5rem;
 					color: var(--vc-text-dark);
 				}
-
-				/* Alerts */
 				.alert {
 					transition: opacity 1s ease;
 					margin-bottom: 1rem;
@@ -355,8 +337,6 @@ const Contact = () => {
 					color: #721c24;
 					border-color: #f5c6cb;
 				}
-
-				/* Buttons */
 				.btn-primary {
 					background-color: var(--vc-primary);
 					border-color: var(--vc-primary);
@@ -369,7 +349,6 @@ const Contact = () => {
 					opacity: 0.7;
 					cursor: not-allowed;
 				}
-
 				@media (max-width: 768px) {
 					.vc-page-content {
 						padding: 2rem 0;
