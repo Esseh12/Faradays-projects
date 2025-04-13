@@ -86,147 +86,151 @@ const FeaturedProjects = () => {
 	};
 
 	return (
-		<section style={{ backgroundColor: '#f9fafb', padding: '4rem 0' }}>
-			<Container>
-				<div className='text-center mb-5'>
-					<h2
-						className='display-5 fw-bold mb-3'
-						style={{ color: '#0A2E5A' }}>
-						Featured Solar Installations
-					</h2>
-					<p
-						className='lead'
-						style={{ color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
-						Explore our cutting-edge renewable energy projects powering homes
-						and businesses across Nigeria.
-					</p>
-				</div>
+		<>
+			<section style={{ backgroundColor: '#f9fafb', padding: '4rem 0' }}>
+				<Container>
+					<div className='text-center mb-5'>
+						<h2
+							className='display-5 fw-bold mb-3'
+							style={{ color: '#0A2E5A' }}>
+							Featured Solar Installations
+						</h2>
+						<p
+							className='lead'
+							style={{ color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
+							Explore our cutting-edge renewable energy projects powering homes
+							and businesses across Nigeria.
+						</p>
+					</div>
 
-				<Slider {...settings}>
-					{solarProjects.map((project) => (
-						<div
-							key={project.id}
-							className='px-2'>
-							<Card className='border-0 shadow overflow-hidden project-card'>
-								<div className='position-relative'>
-									<Card.Img
-										variant='top'
-										src={project.image}
-										style={{ height: '280px', objectFit: 'cover' }}
-									/>
-									<div className='project-overlay'>
-										<div className='project-type'>
-											{getProjectIcon(project.type)}
-											<span className='ms-2'>{project.type.toUpperCase()}</span>
-										</div>
-										<div className='project-stats'>
-											<div className='stat-item'>
-												<FiZap size={20} />
-												<span>{project.capacity}</span>
+					<Slider {...settings}>
+						{solarProjects.map((project) => (
+							<div
+								key={project.id}
+								className='px-2'>
+								<Card className='border-0 shadow overflow-hidden project-card'>
+									<div className='position-relative'>
+										<Card.Img
+											variant='top'
+											src={project.image}
+											style={{ height: '280px', objectFit: 'cover' }}
+										/>
+										<div className='project-overlay'>
+											<div className='project-type'>
+												{getProjectIcon(project.type)}
+												<span className='ms-2'>
+													{project.type.toUpperCase()}
+												</span>
 											</div>
-											<div className='stat-item'>
-												<FiCheckCircle size={20} />
-												<span>{project.savings}</span>
+											<div className='project-stats'>
+												<div className='stat-item'>
+													<FiZap size={20} />
+													<span>{project.capacity}</span>
+												</div>
+												<div className='stat-item'>
+													<FiCheckCircle size={20} />
+													<span>{project.savings}</span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 
-								<Card.Body className='p-4'>
-									<div className='d-flex align-items-start justify-content-between mb-3'>
-										<div>
-											<Card.Title
-												className='fw-bold h5 mb-1'
-												style={{ color: '#0A2E5A' }}>
-												{project.title}
-											</Card.Title>
-											<small className='text-muted'>{project.location}</small>
+									<Card.Body className='p-4'>
+										<div className='d-flex align-items-start justify-content-between mb-3'>
+											<div>
+												<Card.Title
+													className='fw-bold h5 mb-1'
+													style={{ color: '#0A2E5A' }}>
+													{project.title}
+												</Card.Title>
+												<small className='text-muted'>{project.location}</small>
+											</div>
+											<Link to={`/projects/${project.id}`}>
+												<Button
+													variant='primary'
+													size='sm'
+													className='rounded-pill px-3'>
+													Details
+												</Button>
+											</Link>
 										</div>
-										<Link to={`/projects/${project.id}`}>
-											<Button
-												variant='primary'
-												size='sm'
-												className='rounded-pill px-3'>
-												Details
-											</Button>
-										</Link>
-									</div>
-									<Card.Text
-										className='text-secondary'
-										style={{ fontSize: '0.9rem' }}>
-										{project.description}
-									</Card.Text>
-								</Card.Body>
-							</Card>
-						</div>
-					))}
-				</Slider>
-			</Container>
+										<Card.Text
+											className='text-secondary'
+											style={{ fontSize: '0.9rem' }}>
+											{project.description}
+										</Card.Text>
+									</Card.Body>
+								</Card>
+							</div>
+						))}
+					</Slider>
+				</Container>
 
-			<style
-				jsx
-				global>{`
-				.project-card {
-					transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-						box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-					border-radius: 16px !important;
-				}
-				.project-card:hover {
-					transform: translateY(-8px);
-					box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
-				}
-				.project-overlay {
-					position: absolute;
-					bottom: 0;
-					left: 0;
-					right: 0;
-					background: linear-gradient(
-						180deg,
-						transparent 0%,
-						rgba(0, 0, 0, 0.7) 100%
-					);
-					color: white;
-					padding: 1.5rem;
-					padding-top: 4rem;
-				}
-				.project-type {
-					display: flex;
-					align-items: center;
-					position: absolute;
-					top: -24px;
-					left: 16px;
-					background: #d32f2f;
-					color: white;
-					padding: 8px 16px;
-					border-radius: 24px;
-					font-weight: 500;
-					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-				}
-				.project-icon {
-					width: 24px;
-					height: 24px;
-				}
-				.project-stats {
-					display: grid;
-					gap: 1rem;
-					color: rgba(255, 255, 255, 0.9);
-					margin-top: 1rem;
-				}
-				.stat-item {
-					display: flex;
-					align-items: center;
-					gap: 0.5rem;
-					font-size: 0.9rem;
-				}
-				.slick-dots li button:before {
-					font-size: 10px !important;
-					color: #d32f2f !important;
-				}
-				.slick-dots li.slick-active button:before {
-					color: #d32f2f !important;
-				}
-			`}</style>
-		</section>
+				<style
+					jsx
+					global>{`
+					.project-card {
+						transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+							box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+						border-radius: 16px !important;
+					}
+					.project-card:hover {
+						transform: translateY(-8px);
+						box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+					}
+					.project-overlay {
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						background: linear-gradient(
+							180deg,
+							transparent 0%,
+							rgba(0, 0, 0, 0.7) 100%
+						);
+						color: white;
+						padding: 1.5rem;
+						padding-top: 4rem;
+					}
+					.project-type {
+						display: flex;
+						align-items: center;
+						position: absolute;
+						top: -24px;
+						left: 16px;
+						background: #d32f2f;
+						color: white;
+						padding: 8px 16px;
+						border-radius: 24px;
+						font-weight: 500;
+						box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+					}
+					.project-icon {
+						width: 24px;
+						height: 24px;
+					}
+					.project-stats {
+						display: grid;
+						gap: 1rem;
+						color: rgba(255, 255, 255, 0.9);
+						margin-top: 1rem;
+					}
+					.stat-item {
+						display: flex;
+						align-items: center;
+						gap: 0.5rem;
+						font-size: 0.9rem;
+					}
+					.slick-dots li button:before {
+						font-size: 10px !important;
+						color: #d32f2f !important;
+					}
+					.slick-dots li.slick-active button:before {
+						color: #d32f2f !important;
+					}
+				`}</style>
+			</section>
+		</>
 	);
 };
 
