@@ -4,7 +4,6 @@ import { useParams, Link } from 'react-router-dom';
 import OffcanvasNavbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import projectsData from '../../Components/Projects/DummyProjects';
-import { color } from 'framer-motion';
 
 const ProjectDetail = () => {
 	const projectDetailStyle = {
@@ -34,6 +33,18 @@ const ProjectDetail = () => {
 
 	return (
 		<>
+			{/* Global style to prevent horizontal overflow */}
+			<style
+				jsx
+				global>{`
+				html,
+				body {
+					overflow-x: hidden;
+					margin: 0;
+					padding: 0;
+				}
+			`}</style>
+
 			<OffcanvasNavbar styleProps={projectDetailStyle} />
 
 			<div className='newspaper-project-detail'>
@@ -114,11 +125,6 @@ const ProjectDetail = () => {
 					}
 
 					.newspaper-project-detail {
-						// font-family: var(--newspaper-text);
-						// background-color: var(--background-color);
-						// color: var(--primary-text-color);
-						// line-height: 1.7;
-
 						/* Add top margin to prevent overlap with sticky/fixed navbar */
 						margin-top: 4rem; /* Default top margin for medium+ screens */
 						padding-bottom: 3rem;
