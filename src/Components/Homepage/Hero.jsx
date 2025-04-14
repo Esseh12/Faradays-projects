@@ -27,8 +27,7 @@ const HeroSection = () => {
 
 	useEffect(() => {
 		const video = document.createElement('video');
-		video.src =
-			'https://digitalassets.tesla.com/tesla-contents/video/upload/f_auto,q_auto:best/solar-panels-hero-desktop.mp4';
+		video.src = '/Video/solar-panels-hero-desktop.webm';
 		video.onloadeddata = () => setVideoLoaded(true);
 	}, []);
 

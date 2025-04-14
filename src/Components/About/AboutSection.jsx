@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';
 import PartnersSection from '../Partners';
+import FeaturedProjects from '../Homepage/Featured';
 import avatar_one from '../../assets/Images/avatar_one.svg';
 import avatar_two from '../../assets/Images/avatar_two.svg';
 
@@ -327,6 +328,7 @@ const AboutSection = () => {
 				</Container>
 			</section>
 
+			<FeaturedProjects />
 			{/* Partners Section */}
 			<PartnersSection />
 

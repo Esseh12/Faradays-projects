@@ -1,7 +1,7 @@
 import OffcanvasNavbar from '../Components/Navbar';
 import HeroSection from '../Components/Homepage/Hero';
 import CommunitySection from '../Components/Homepage/Community';
-import FeaturedProjects from '../Components/Homepage/Featured';
+import SolarSlider from '../Components/Homepage/Slider';
 import Services from '../Components/Homepage/Services';
 import Testimonial from '../Components/Homepage/Testimonial';
 import PartnersSection from '../Components/Partners';
@@ -26,7 +26,7 @@ const Homepage = () => {
 			<HeroSection />
 			{/* <HomeAbout /> */}
 			<CommunitySection />
-			<FeaturedProjects />
+			<SolarSlider />
 			<Services />
 			<Testimonial />
 			<PartnersSection />

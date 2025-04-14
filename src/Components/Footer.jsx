@@ -110,7 +110,7 @@ const Footer = () => {
 								<FiLinkedin />
 							</a>
 							<a
-								href='#'
+								href='https://www.instagram.com/faradayprojects/'
 								aria-label='Instagram'>
 								<FiInstagram />
 							</a>
