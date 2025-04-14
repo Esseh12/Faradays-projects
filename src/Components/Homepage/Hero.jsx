@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import userAvatar from '../../assets/Images/avatar_one.svg';
 import avatar from '../../assets/Images/avatar_two.svg';
 import star_group from '../../assets/Images/stars_group.svg';
@@ -126,21 +127,26 @@ const HeroSection = () => {
 							<Button
 								variant='light'
 								size='lg'
-								className='px-5 py-3'
+								className='px-3 py-2'
 								style={{
 									fontWeight: '600',
 									transition: 'all 0.3s ease',
-								}}>
+								}}
+								onClick={() => (window.location.href = '/projects')}>
 								Explore Solutions
 							</Button>
 							<Button
 								variant='outline-light'
 								size='lg'
-								className='px-5 py-3'
+								className='px-3 py-2'
 								style={{
 									fontWeight: '600',
 									transition: 'all 0.3s ease',
-								}}>
+								}}
+								onClick={() =>
+									(window.location.href =
+										'/Video/solar-panels-hero-desktop.webm')
+								}>
 								Watch Demo
 							</Button>
 						</div>
